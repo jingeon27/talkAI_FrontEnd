@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "echo 'Hello'",
+    "pre-push": "./husky/pre-push"
+  }
+}
