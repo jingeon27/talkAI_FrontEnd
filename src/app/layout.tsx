@@ -1,5 +1,5 @@
 import StyledComponentsRegistry from "./resistry";
-import { CustomProvider } from "./components/theme";
+import { CustomProvider } from "../theme";
 export default function RootLayout({
   children,
 }: {

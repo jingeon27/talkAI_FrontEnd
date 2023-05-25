@@ -8,4 +8,6 @@ export default function Home() {
     </main>
   );
 }
-const _Div = styled.div``;
+const _Div = styled.div`
+  background-color: ${({ theme }) => theme.color.BACKGROUND};
+`;
