@@ -47,7 +47,9 @@ export const color = {
   OUTLINE: "#938F99",
   OUTLINE_VARIENT: "#49454F",
 } as const;
-export const theme = {
-  color,
-  font,
-};
+declare module "styled-components" {
+  export interface DefaultTheme {
+    color: typeof color;
+    font: typeof font;
+  }
+}

@@ -10,4 +10,6 @@ export default function Home() {
 }
 const _Div = styled.div`
   background-color: ${({ theme }) => theme.color.BACKGROUND};
+  color: ${({ theme }) => theme.color.ERROR};
+  font: ${({ theme }) => theme.font.BODY_LARGE};
 `;
