@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
 import StyledComponentsRegistry from "./resistry";
-
+import { CustomProvider } from "./components/theme";
 export default function RootLayout({
   children,
 }: {
@@ -9,7 +8,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <CustomProvider>{children}</CustomProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
