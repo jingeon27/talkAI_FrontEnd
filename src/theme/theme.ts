@@ -3,7 +3,7 @@ interface ITransfomrToFontProps {
   r: number;
 }
 const TransformToFont = ({ w, r }: ITransfomrToFontProps): string =>
-  `${w} normal ${r}px Roboto,sans-serif`;
+  `${w} normal ${r}px Roboto`;
 export const font = {
   DISPLAY_LARGE: TransformToFont({ w: 400, r: 57 }),
   DISPLAY_MEDIUM: TransformToFont({ w: 400, r: 45 }),

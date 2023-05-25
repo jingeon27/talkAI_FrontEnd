@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import styled from "styled-components";
 export default function Home() {
   return (
@@ -11,5 +10,5 @@ export default function Home() {
 const _Div = styled.div`
   background-color: ${({ theme }) => theme.color.BACKGROUND};
   color: ${({ theme }) => theme.color.ERROR};
-  font: ${({ theme }) => theme.font.BODY_LARGE};
+  font: ${({ theme }) => theme.font.DISPLAY_LARGE};
 `;
