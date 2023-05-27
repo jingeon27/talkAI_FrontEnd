@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
  body {
-    background-color: ${({ theme }) => theme.color.BACKGROUND};
+    background-color: ${({ theme }) => theme.color.SURFACE_VARIENT};
  }
 `;

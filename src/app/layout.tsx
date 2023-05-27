@@ -3,7 +3,7 @@ import { CustomProvider } from "../theme";
 import { Roboto } from "next/font/google";
 const roboto = Roboto({
   weight: ["400", "500"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
