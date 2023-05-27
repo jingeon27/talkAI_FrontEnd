@@ -3,15 +3,16 @@ import { within, userEvent } from "@storybook/testing-library";
 import { List } from "../components/list";
 
 const meta: Meta<typeof List> = {
-  title: "Example/Page",
+  title: "Components/List",
   component: List,
-  parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
-    layout: "fullscreen",
-  },
+  tags: ["autodocs"],
 };
-
 export default meta;
 type Story = StoryObj<typeof List>;
 
-export const LoggedOut: Story = {};
+export const FirstList: Story = {
+  args: {
+    onClick: () => {},
+    name: "안녕하세요.",
+  },
+};
