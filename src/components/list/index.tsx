@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { theme } from "../../theme/theme";
 
 export interface IListProps {
   onClick: () => void;
@@ -12,9 +13,8 @@ export const List = (props: IListProps) => {
   );
 };
 const _List = styled.li`
-  height: 20px;
   list-style: none;
-
+  background-color: ${({ theme }) => theme.color.BACKGROUND};
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
-  font: ${({ theme }) => theme.font.LABEL_LARGE};
+  ${({ theme }) => theme.font.LABEL_LARGE};
 `;
