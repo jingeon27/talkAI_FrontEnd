@@ -4,19 +4,22 @@ export interface IRootContextProviderProps {
   children: ReactNode;
 }
 export interface IRootActionContext {
-  changeHeaderState: (header: string) => void;
+  changeHeaderState: (header: "main") => void;
 }
-export const RootValueContext = createContext({});
+const initialState = {
+  header: "main",
+};
+export const RootValueContext = createContext(initialState);
 export const RootActionContext = createContext<IRootActionContext>({
   changeHeaderState: () => null,
 });
 export const RootContextProvider = ({
   children,
 }: IRootContextProviderProps) => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState(initialState);
   const actions = useMemo(
     () => ({
-      changeHeaderState(header: string) {
+      changeHeaderState(header: "main") {
         setState((prev) => ({ ...prev, header }));
       },
     }),

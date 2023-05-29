@@ -1,6 +1,7 @@
 import StyledComponentsRegistry from "./resistry";
 import { CustomProvider } from "../theme";
 import { Roboto } from "next/font/google";
+import { RootContextProvider } from "@/hooks/context";
 const roboto = Roboto({
   weight: ["400", "500"],
   style: ["normal"],
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="ko" className={roboto.className}>
       <body>
         <StyledComponentsRegistry>
-          <CustomProvider>{children}</CustomProvider>
+          <CustomProvider>
+            <RootContextProvider>{children}</RootContextProvider>
+          </CustomProvider>
         </StyledComponentsRegistry>
       </body>
     </html>
