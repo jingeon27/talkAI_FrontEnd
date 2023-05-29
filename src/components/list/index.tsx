@@ -14,7 +14,11 @@ export const List = (props: IListProps) => {
 };
 const _List = styled.li`
   list-style: none;
+
   background-color: ${({ theme }) => theme.color.BACKGROUND};
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
   ${({ theme }) => theme.font.LABEL_LARGE};
+
+  padding: 10px;
+  overflow: hidden;
 `;
