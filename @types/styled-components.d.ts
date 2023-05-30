@@ -51,5 +51,6 @@ declare module "styled-components" {
   export interface DefaultTheme {
     color: typeof color;
     font: typeof font;
+    scroll: string;
   }
 }

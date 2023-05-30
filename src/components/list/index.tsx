@@ -1,23 +1,35 @@
 import { styled } from "styled-components";
+import { List } from "../list-item";
 
-export interface IListProps {
-  onClick: () => void;
-  name: string;
-}
-export const List = (props: IListProps) => {
+export const MainMenu = () => {
   return (
     <>
-      <_List {...props}>{props.name}</_List>
+      <_Ul>
+        <List
+          onClick={() => {
+            console.log("asdf");
+          }}
+          name={"dd"}
+        />
+        <List
+          onClick={() => {
+            console.log("asdf");
+          }}
+          name={"dd"}
+        />
+        <List
+          onClick={() => {
+            console.log("asdf");
+          }}
+          name={"dd"}
+        />
+      </_Ul>
     </>
   );
 };
-const _List = styled.li`
-  list-style: none;
-
+const _Ul = styled.ul`
+  width: 250px;
+  margin: 0;
+  padding: 0;
   background-color: ${({ theme }) => theme.color.BACKGROUND};
-  color: ${({ theme }) => theme.color.ON_BACKGROUND};
-  ${({ theme }) => theme.font.LABEL_LARGE};
-
-  padding: 10px;
-  overflow: hidden;
 `;
