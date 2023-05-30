@@ -31,6 +31,5 @@ const _Ul = styled.ul`
   width: 250px;
   margin: 0;
   padding: 0;
-  overflow: scroll;
   background-color: ${({ theme }) => theme.color.BACKGROUND};
 `;

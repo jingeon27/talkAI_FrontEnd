@@ -19,7 +19,11 @@ const _Section = styled.section`
   display: flex;
   flex-grow: 1;
   > main {
-    overflow: hidden;
     flex-grow: 1;
+  }
+
+  > {
+    overflow: scroll;
+    ${({ theme }) => theme.scroll}
   }
 `;
