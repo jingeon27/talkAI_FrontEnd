@@ -1,10 +1,12 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { Menu } from "../menu";
+
 export interface ISectionProps {
   children: ReactNode;
   active: boolean;
 }
+
 export const Section = ({ children, active }: ISectionProps) => {
   return (
     <>
