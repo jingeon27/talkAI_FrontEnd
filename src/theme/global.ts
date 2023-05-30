@@ -4,10 +4,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.color.SURFACE_VARIENT};
     overflow-x: hidden;
     scroll-behavior: smooth;
-     margin: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
  }
- * {
-    outline: none;
-    box-sizing: border-box;
-  }
 `;

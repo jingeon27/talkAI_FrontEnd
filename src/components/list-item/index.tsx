@@ -13,11 +13,19 @@ export const List = (props: IListProps) => {
 };
 const _List = styled.li`
   list-style: none;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+  cursor: pointer;
 
   background-color: ${({ theme }) => theme.color.BACKGROUND};
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
   ${({ theme }) => theme.font.LABEL_LARGE};
 
-  padding: 10px;
-  overflow: hidden;
+  &:hover {
+    background-color: ${({ theme }) => theme.color.OUTLINE};
+  }
 `;
