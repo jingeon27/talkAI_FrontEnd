@@ -1,4 +1,3 @@
-"use client";
 import { ReactNode, createContext, useMemo, useState } from "react";
 export interface IRootContextProviderProps {
   children: ReactNode;
