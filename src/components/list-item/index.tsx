@@ -1,3 +1,4 @@
+import { ChatIcon } from "@/assets/chat-icon";
 import { styled } from "styled-components";
 
 export interface IListProps {
@@ -7,7 +8,10 @@ export interface IListProps {
 export const List = (props: IListProps) => {
   return (
     <>
-      <_List {...props}>{props.name}</_List>
+      <_List {...props}>
+        <ChatIcon />
+        {props.name}
+      </_List>
     </>
   );
 };
@@ -18,10 +22,12 @@ const _List = styled.li`
   display: flex;
   align-items: center;
 
+  padding: 0 20px;
+  gap: 20px;
+
   overflow: hidden;
   cursor: pointer;
 
-  background-color: ${({ theme }) => theme.color.BACKGROUND};
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
   ${({ theme }) => theme.font.LABEL_LARGE};
 

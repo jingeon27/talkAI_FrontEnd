@@ -1,14 +1,42 @@
 "use client";
-import styled from "styled-components";
+import { InputQuestion } from "@/components/input";
+import { useState } from "react";
+import { styled } from "styled-components";
 export default function Home() {
+  const [value, setValue] = useState<string>("");
   return (
     <>
-      <_Div>안녕하세요.</_Div>
+      <_Main>
+        <_Layout>
+          <_Wrapper>
+            <InputQuestion
+              value={value}
+              onInput={(e) => setValue(e.target.value)}
+            />
+          </_Wrapper>
+        </_Layout>
+      </_Main>
     </>
   );
 }
-const _Div = styled.div`
-  color: ${({ theme }) => theme.color.ERROR};
-  font: ${({ theme }) => theme.font.DISPLAY_LARGE};
-  height: 100vh;
+const _Wrapper = styled.div`
+  display: flex;
+  width: 700px;
+  height: 50px;
+`;
+const _Main = styled.main`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+`;
+const _Layout = styled.div`
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+
+  background-color: ${({ theme }) => theme.color.SURFACE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { Menu } from "../menu";
 
 export interface ISectionProps {
@@ -12,7 +12,7 @@ export const Section = ({ children, active }: ISectionProps) => {
     <>
       <_Section>
         {active ? <Menu /> : <></>}
-        <main>{children}</main>
+        {children}
       </_Section>
     </>
   );
@@ -20,10 +20,6 @@ export const Section = ({ children, active }: ISectionProps) => {
 const _Section = styled.section`
   display: flex;
   flex-grow: 1;
-  > main {
-    flex-grow: 1;
-  }
-
   > {
     overflow: scroll;
     ${({ theme }) => theme.scroll}

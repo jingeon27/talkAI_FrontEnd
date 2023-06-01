@@ -1,4 +1,3 @@
-"use client";
 import { Header } from "@/components/header";
 import { Section } from "@/components/section";
 import { ReactNode, useState } from "react";
