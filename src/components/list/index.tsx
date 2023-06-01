@@ -28,8 +28,9 @@ export const MainMenu = () => {
   );
 };
 const _Ul = styled.ul`
-  width: 250px;
   margin: 0;
   padding: 0;
+  z-index: 2;
+  width: 250px;
   background-color: ${({ theme }) => theme.color.BACKGROUND};
 `;
