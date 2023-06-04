@@ -12,6 +12,6 @@ type Story = StoryObj<typeof Header>;
 export const HeaderComponent: Story = {
   args: {
     onClick: () => {},
-    active: false,
+    width: 100,
   },
 };
