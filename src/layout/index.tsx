@@ -8,7 +8,9 @@ export interface IRootLayoutProviderProps {
   children: ReactNode;
 }
 
-export const RootLayoutProvider = ({ children }: IRootLayoutProviderProps) => {
+export const RootLayoutComponents = ({
+  children,
+}: IRootLayoutProviderProps) => {
   return (
     <CustomApolloProvider>
       <CustomProvider>

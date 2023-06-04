@@ -1,6 +1,6 @@
 import StyledComponentsRegistry from "./resistry";
 import { Roboto } from "next/font/google";
-import { RootLayoutProvider } from "@/layout";
+import { RootLayoutComponents } from "@/layout";
 import { ReactNode } from "react";
 
 const roboto = Roboto({
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko" className={roboto.className}>
       <body>
         <StyledComponentsRegistry>
-          <RootLayoutProvider>{children}</RootLayoutProvider>
+          <RootLayoutComponents>{children}</RootLayoutComponents>
         </StyledComponentsRegistry>
       </body>
     </html>

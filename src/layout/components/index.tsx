@@ -13,7 +13,7 @@ export const RootComponents = ({ children }: IRootComponentsProps) => {
   };
   return (
     <>
-      <Header {...{ active, onClick }} />
+      <Header {...{ width: active ? 250 : 100, onClick }} />
       <Section {...{ active }}>{children}</Section>
     </>
   );

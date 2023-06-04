@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.color.SURFACE_VARIENT};
     overflow-x: hidden;
 
-
     margin: 0;
     display: flex;
     flex-direction: column; 

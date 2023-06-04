@@ -2,7 +2,7 @@ import { ListButtonIcon } from "@/assets/listButton-icon.svg";
 import { styled } from "styled-components";
 export interface IHeaderProps {
   onClick: () => void;
-  active: boolean;
+  width: number;
 }
 export const Header = (props: IHeaderProps) => {
   return (
@@ -34,12 +34,12 @@ const _Header = styled.header`
     }
   }
 `;
-const _Button = styled.nav<{ active: boolean }>`
+const _Button = styled.nav<{ width: number }>`
   height: 80px;
-  width: ${({ active }) => (active ? 250 : 100)}px;
+  width: ${({ width }) => width}px;
 
-  background-color: ${({ active, theme }) =>
-    active ? theme.color.BACKGROUND : theme.color.SURFACE_VARIENT};
+  background-color: ${({ width, theme }) =>
+    width === 250 ? theme.color.BACKGROUND : theme.color.SURFACE_VARIENT};
   &:hover {
     background-color: ${({ theme }) => theme.color.OUTLINE};
   }
