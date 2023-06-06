@@ -1,8 +1,9 @@
 import { useRootAction } from "@/hooks/context/useRootActionContext";
+import { IRootMikeProps } from "@/util/root-mike-props-interface";
 import { useEffect, useState } from "react";
 import { keyframes, styled } from "styled-components";
-
-export const VoiceComponents = () => {
+export interface IVoiceComponentsProps extends IRootMikeProps {}
+export const VoiceComponents = ({ changeChat }: IVoiceComponentsProps) => {
   const { setMikeState } = useRootAction();
   const [state, setState] = useState<boolean>(false);
   useEffect(() => {
@@ -20,11 +21,14 @@ export const VoiceComponents = () => {
       };
       NativeSpeechRecognition.onresult = (event: any) => {
         const result = [...event.results[0]];
-        console.log(
-          result.map((e: { transcript: string }) => e.transcript).join("")
-        );
         setState(false);
         setMikeState();
+        changeChat({
+          role: "user",
+          content: result
+            .map((e: { transcript: string }) => e.transcript)
+            .join(""),
+        });
       };
     }
   }, []);
@@ -60,8 +64,8 @@ const _Layout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.3);
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
 `;
 const _DeleteButton = styled.div`

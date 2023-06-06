@@ -3,20 +3,26 @@ import { styled } from "styled-components";
 import { InputQuestion } from "../input";
 import { useState } from "react";
 import { SendIcon } from "@/assets/send-icon";
-
-export const RootInput = () => {
-  const [value, setValue] = useState<string>("");
+import { IRootMikeProps } from "@/util/root-mike-props-interface";
+export interface IRootInput extends IRootMikeProps {}
+export const RootInput = ({ changeChat }: IRootInput) => {
+  const [content, setValue] = useState<string>("");
   return (
     <>
       <_Wrapper>
         <InputQuestion
-          value={value}
+          value={content}
           onInput={(e) => setValue(e.target.value)}
           placeholder={"질문을 입력해주세요."}
         />
         <MikeIcon />
-        <_Button len={value.length}>
-          <SendIcon onClick={() => {}} />
+        <_Button len={content.length}>
+          <SendIcon
+            onClick={() => {
+              changeChat({ role: "user", content });
+              setValue("");
+            }}
+          />
         </_Button>
       </_Wrapper>
     </>
