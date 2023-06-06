@@ -1,13 +1,15 @@
 import { useRootAction } from "@/hooks/context/useRootActionContext";
+import { useRootValue } from "@/hooks/context/useRootValueContext";
 import { IRootMikeProps } from "@/util/root-mike-props-interface";
 import { useEffect, useState } from "react";
 import { keyframes, styled } from "styled-components";
 export interface IVoiceComponentsProps extends IRootMikeProps {}
 export const VoiceComponents = ({ changeChat }: IVoiceComponentsProps) => {
+  const { mikeOn } = useRootValue();
   const { setMikeState } = useRootAction();
   const [state, setState] = useState<boolean>(false);
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && mikeOn) {
       const NativeSpeechRecognition = new (window.SpeechRecognition ||
         window.webkitSpeechRecognition ||
         window.mozSpeechRecognition ||
@@ -29,9 +31,10 @@ export const VoiceComponents = ({ changeChat }: IVoiceComponentsProps) => {
             .map((e: { transcript: string }) => e.transcript)
             .join(""),
         });
+        NativeSpeechRecognition.stop();
       };
     }
-  }, []);
+  }, [mikeOn, setMikeState]);
   return (
     <>
       <_Layout>

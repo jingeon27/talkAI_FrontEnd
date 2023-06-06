@@ -1,32 +1,30 @@
 import { IChatResponse } from "@/util/chat-response.interface";
 import { gql, useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-// export const CHAT_RESPONSE = gql`
-//   {
-//     mutation
-//     chatResponse(question: [{ role: String, content: String }]) {
-//       chatResponse(question: $question)
-//     }
-//   }
-// `;
-
-export const MUTATION = gql`
-  mutation ChatResponse {
-    chatResponse
+const CHAT_RESPONSE_QUERY = gql`
+  mutation ChatResponse($question: [ChatResponseInput!]!) {
+    chatResponse(question: $question)
   }
 `;
-const initialState = {
-  chatResponse: "",
-};
-export const ChatResponse = (state: IChatResponse[]) => {
-  const [chatResponseMutation, { data, error }] = useMutation(MUTATION);
-  const getData = async () => {
-    return await chatResponseMutation();
-  };
+export interface IChatResponseProps {
+  question: IChatResponse[];
+  changeChat: (props: IChatResponse) => void;
+}
+export const ChatResponse = ({ question, changeChat }: IChatResponseProps) => {
+  const [chatResponse] = useMutation<{
+    chatResponse: string;
+  }>(CHAT_RESPONSE_QUERY);
   useEffect(() => {
-    getData();
-  }, [state]);
-  console.log(data);
-  return { data };
+    if (question.at(-1)?.role === "user") {
+      chatResponse({
+        variables: { question },
+      }).then((res) =>
+        changeChat({
+          role: "assistant",
+          content: res.data?.chatResponse as string,
+        })
+      );
+    }
+  }, [question]);
 };

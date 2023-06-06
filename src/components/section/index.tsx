@@ -20,6 +20,9 @@ export const Section = ({ children, active }: ISectionProps) => {
 const _Section = styled.section`
   display: flex;
   flex-grow: 1;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-top: 80px;
   > {
     overflow: scroll;
     ${({ theme }) => theme.scroll}
