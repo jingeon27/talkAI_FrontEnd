@@ -8,7 +8,5 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
 
     margin: 0;
-    display: flex;
-    flex-direction: column; 
  }
 `;

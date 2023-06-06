@@ -1,5 +1,6 @@
 import { ListButtonIcon } from "@/assets/listButton-icon.svg";
 import { styled } from "styled-components";
+import { theme } from "../../theme/theme";
 export interface IHeaderProps {
   onClick: () => void;
   width: number;
@@ -17,9 +18,15 @@ export const Header = (props: IHeaderProps) => {
   );
 };
 const _Header = styled.header`
+  position: fixed;
+  width: 100%;
+  top: 0;
   height: 80px;
   border-bottom: 1px solid ${({ theme }) => theme.color.ON_BACKGROUND};
+  box-sizing: border-box;
+
   padding-right: 50px;
+  background-color: ${({ theme }) => theme.color.SURFACE_VARIENT};
 
   display: flex;
   align-items: center;
@@ -28,14 +35,13 @@ const _Header = styled.header`
   > nav {
     cursor: pointer;
     color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
-
     &:hover {
       color: ${({ theme }) => theme.color.ON_SURFACE};
     }
   }
 `;
 const _Button = styled.nav<{ width: number }>`
-  height: 80px;
+  height: 79px;
   width: ${({ width }) => width}px;
 
   background-color: ${({ width, theme }) =>
