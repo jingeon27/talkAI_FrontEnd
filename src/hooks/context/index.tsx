@@ -1,11 +1,4 @@
-import {
-  ReactNode,
-  RefObject,
-  createContext,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, createContext, useMemo, useState } from "react";
 export interface IRootContextProviderProps {
   children: ReactNode;
 }
@@ -30,8 +23,7 @@ export const RootActionContext = createContext<IRootActionContext>({
 export const RootContextProvider = ({
   children,
 }: IRootContextProviderProps) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [state, setState] = useState({ ...initialState, scrollRef });
+  const [state, setState] = useState(initialState);
 
   const actions = useMemo(
     () => ({
