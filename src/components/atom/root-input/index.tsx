@@ -3,10 +3,14 @@ import { styled } from "styled-components";
 import { InputQuestion } from "../input";
 import { useState } from "react";
 import { SendIcon } from "@/assets/send-icon";
-import { IRootMikeProps } from "@/util/root-mike-props-interface";
-export interface IRootInput extends IRootMikeProps {}
-export const RootInput = ({ changeChat }: IRootInput) => {
+import { useMainAction } from "@/hooks/context/main";
+export const RootInput = () => {
   const [content, setContent] = useState<string>("");
+  const { changeChat } = useMainAction();
+  const out = () => {
+    changeChat({ role: "user", content });
+    setContent("");
+  };
   return (
     <>
       <_Wrapper>
@@ -15,13 +19,21 @@ export const RootInput = ({ changeChat }: IRootInput) => {
             value={content}
             onInput={(e) => setContent(e.target.value)}
             placeholder={"질문을 입력해주세요."}
+            onKeyDown={(e) => {
+              if (
+                content !== "" &&
+                e.key === "Enter" &&
+                !e.nativeEvent.isComposing
+              ) {
+                out();
+              }
+            }}
           />
           <MikeIcon />
           <_Button len={content.length}>
             <SendIcon
               onClick={() => {
-                changeChat({ role: "user", content });
-                setContent("");
+                if (content !== "") out();
               }}
             />
           </_Button>

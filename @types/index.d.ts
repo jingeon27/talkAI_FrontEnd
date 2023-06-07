@@ -7,7 +7,8 @@ declare interface Window {
 interface IWebSpeechOption {
   onresult: (e: any) => void;
   onstart: (e?: any) => void;
-  start();
+  start(): void;
+  stop(): void;
   lang: string;
   continuous: boolean;
   interimResults: boolean;

@@ -1,5 +1,5 @@
-import { Header } from "@/components/header";
-import { Section } from "@/components/section";
+import { Header } from "@/components/root/header";
+import { Section } from "@/components/root/section";
 import { ReactNode, useState } from "react";
 
 export interface IRootComponentsProps {

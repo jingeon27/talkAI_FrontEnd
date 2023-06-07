@@ -1,31 +1,39 @@
 import { IChatResponse } from "@/util/chat-response.interface";
-import { styled } from "styled-components";
-import { useEffect, useState } from "react";
-
+import { keyframes, styled } from "styled-components";
+import { useChatEffect } from "@/hooks/chat";
 export interface IChatProps extends IChatResponse {
   key: string;
+  loading?: boolean;
 }
-export const Chat = ({ content, ...props }: IChatProps) => {
-  const [state, setState] = useState<string>("");
-  useEffect(() => {
-    const interval = setTimeout(() => {
-      if (state.length !== content.length) {
-        setState(content.slice(0, state.length + 1));
-      }
-    }, 30);
-    return () => clearTimeout(interval);
-  }, [state]);
+// eslint-disable-next-line react/display-name
+export const Chat = ({ content, loading, ...props }: IChatProps) => {
+  const { chat, isWriting } = useChatEffect(content);
+  const isUser = props.role === "user";
   return (
     <>
       <_Chat {...props}>
         <div>
-          <div>{props.role === "user" ? "me : " : "assistant : "}</div>
-          <div>{state}</div>
+          <div>{isUser ? "나 : " : "오정수 : "}</div>
+          <div>
+            {isUser ? content : chat}
+            {(!isWriting || loading) && !isUser && <span>|</span>}
+          </div>
         </div>
       </_Chat>
     </>
   );
 };
+const ChatAnimate = keyframes`
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity:1;
+    }
+    100% {
+        opacity: 0;
+    }
+`;
 const _Chat = styled.div<Omit<IChatProps, "content">>`
   width: 100%;
   ${({ theme }) => theme.font.BODY_LARGE};
@@ -50,6 +58,9 @@ const _Chat = styled.div<Omit<IChatProps, "content">>`
         color: ${({ theme }) => theme.color.ON_BACKGROUND};
         white-space: break-spaces;
         ${({ theme }) => theme.font.TITLE_LAGRE};
+      }
+      > span {
+        animation: ${ChatAnimate} 0.3s linear 0s infinite;
       }
     }
   }
