@@ -1,5 +1,5 @@
-import { IChatResponse } from "@/util/chat-response.interface";
-import { gql, useMutation } from "@apollo/client";
+import { useMainAction, useMainValue } from "@/hooks/context/main";
+import { ApolloError, gql, useMutation } from "@apollo/client";
 import { useEffect } from "react";
 
 const CHAT_RESPONSE_QUERY = gql`
@@ -7,18 +7,19 @@ const CHAT_RESPONSE_QUERY = gql`
     chatResponse(question: $question)
   }
 `;
-export interface IChatResponseProps {
-  question: IChatResponse[];
-  changeChat: (props: IChatResponse) => void;
-}
-export const ChatResponse = ({ question, changeChat }: IChatResponseProps) => {
-  const [chatResponse] = useMutation<{
+export const ChatResponse = (): {
+  loading: boolean;
+  error: ApolloError | undefined;
+} => {
+  const { chat } = useMainValue();
+  const { changeChat } = useMainAction();
+  const [chatResponse, { loading, error }] = useMutation<{
     chatResponse: string;
   }>(CHAT_RESPONSE_QUERY);
   useEffect(() => {
-    if (question.at(-1)?.role === "user") {
+    if (chat.at(-1)?.role === "user") {
       chatResponse({
-        variables: { question },
+        variables: { question: chat },
       }).then((res) =>
         changeChat({
           role: "assistant",
@@ -26,5 +27,7 @@ export const ChatResponse = ({ question, changeChat }: IChatResponseProps) => {
         })
       );
     }
-  }, [question]);
+  }, [chat]);
+
+  return { loading, error };
 };

@@ -1,7 +1,7 @@
-import { useRootAction } from "@/hooks/context/useRootActionContext";
+import { useMainAction } from "@/hooks/context/main";
 import { styled } from "styled-components";
 export const MikeIcon = () => {
-  const { setMikeState } = useRootAction();
+  const { setMikeState } = useMainAction();
   return (
     <>
       <_Svg
