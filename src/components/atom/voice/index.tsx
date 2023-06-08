@@ -1,9 +1,16 @@
 import { IRootMikeProps } from "@/util/root-mike-props-interface";
 import { useEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
-import { IWebSpeechOption } from "@/util";
 import { useMainAction, useMainValue } from "@/hooks/context/main";
-export interface IVoiceComponentsProps extends IRootMikeProps {}
+interface IWebSpeechOption {
+  onresult: (e: any) => void;
+  onstart: (e?: any) => void;
+  start(): void;
+  stop(): void;
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+}
 export const VoiceComponents = () => {
   const { mikeOn } = useMainValue();
   const { setMikeState, changeChat } = useMainAction();
