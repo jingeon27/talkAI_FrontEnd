@@ -1,4 +1,4 @@
 export interface IChatResponse {
-  role: "assistant" | "user";
+  role: "assistant" | "user" | "system";
   content: string;
 }

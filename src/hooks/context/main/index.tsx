@@ -10,23 +10,29 @@ import {
   useRef,
   useState,
 } from "react";
+
 type InitialStateType = {
   mikeOn: boolean;
   scrollRef: RefObject<HTMLDivElement> | null;
   chat: IChatResponse[];
+  name: string;
 };
 const initialState: InitialStateType = {
   scrollRef: null,
   mikeOn: false,
   chat: [],
+  name: "assistant",
 };
-export interface IMainActionContext {
+
+interface IMainActionContext {
   changeChat: (props: IChatResponse) => void;
   setMikeState: () => void;
+  setChatBotAi: (props: IChatResponse, name: string) => void;
 }
 const MainContextAction = createContext<IMainActionContext>({
   changeChat: () => null,
   setMikeState: () => null,
+  setChatBotAi: () => null,
 });
 const MainContextValue = createContext<InitialStateType>(initialState);
 export const MainProvider = ({ children }: IChildren) => {
@@ -39,6 +45,9 @@ export const MainProvider = ({ children }: IChildren) => {
       },
       setMikeState() {
         setState((prev) => ({ ...prev, mikeOn: !prev.mikeOn }));
+      },
+      setChatBotAi(props: IChatResponse, name: string) {
+        setState((prev) => ({ ...prev, chat: [props], name }));
       },
     }),
     []

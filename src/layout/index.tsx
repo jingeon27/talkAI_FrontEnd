@@ -4,6 +4,7 @@ import { RootContextProvider } from "@/hooks/context";
 import { CustomProvider } from "@/theme";
 import { ReactNode } from "react";
 import { RootComponents } from "@/layout/components";
+import { Toast } from "@/components/toast";
 export interface IRootLayoutProviderProps {
   children: ReactNode;
 }
@@ -16,6 +17,7 @@ export const RootLayoutComponents = ({
       <CustomProvider>
         <RootContextProvider>
           <RootComponents>{children}</RootComponents>
+          <Toast />
         </RootContextProvider>
       </CustomProvider>
     </CustomApolloProvider>
