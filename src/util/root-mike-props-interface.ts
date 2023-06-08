@@ -1,5 +1,5 @@
-import { IChatProps } from "@/components/chat";
+import { IChatResponse } from "./chat-response.interface";
 
 export interface IRootMikeProps {
-  changeChat: (props: Omit<IChatProps, "key">) => void;
+  changeChat: (props: IChatResponse) => void;
 }

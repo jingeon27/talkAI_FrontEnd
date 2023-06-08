@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { List } from "../list-item";
+import { List } from "../../atom/list-item";
 
 export const MainMenu = () => {
   return (

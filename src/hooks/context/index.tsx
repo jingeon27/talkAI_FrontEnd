@@ -5,20 +5,20 @@ export interface IRootContextProviderProps {
 export interface IRootActionContext {
   changeHeaderState: (header: "main") => void;
   setLoginState: () => void;
-  setMikeState: () => void;
 }
-type InitialStateType = { header: "main"; login: boolean; mikeOn: boolean };
+type InitialStateType = {
+  header: "main";
+  login: boolean;
+};
 const initialState: InitialStateType = {
   header: "main",
   login: false,
-  mikeOn: false,
 };
 
 export const RootValueContext = createContext<InitialStateType>(initialState);
 export const RootActionContext = createContext<IRootActionContext>({
   changeHeaderState: () => null,
   setLoginState: () => null,
-  setMikeState: () => null,
 });
 export const RootContextProvider = ({
   children,
@@ -32,9 +32,6 @@ export const RootContextProvider = ({
       },
       setLoginState() {
         setState((prev) => ({ ...prev, login: !prev.login }));
-      },
-      setMikeState() {
-        setState((prev) => ({ ...prev, mikeOn: !prev.mikeOn }));
       },
     }),
     []

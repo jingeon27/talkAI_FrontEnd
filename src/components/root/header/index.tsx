@@ -1,6 +1,5 @@
-import { ListButtonIcon } from "@/assets/listButton-icon.svg";
+import { ListButtonIcon } from "@/assets/listButton-icon";
 import { styled } from "styled-components";
-import { theme } from "../../theme/theme";
 export interface IHeaderProps {
   onClick: () => void;
   width: number;

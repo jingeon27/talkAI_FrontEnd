@@ -1,27 +1,39 @@
-import { useRootAction } from "@/hooks/context/useRootActionContext";
-import { useRootValue } from "@/hooks/context/useRootValueContext";
 import { IRootMikeProps } from "@/util/root-mike-props-interface";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
-export interface IVoiceComponentsProps extends IRootMikeProps {}
-export const VoiceComponents = ({ changeChat }: IVoiceComponentsProps) => {
-  const { mikeOn } = useRootValue();
-  const { setMikeState } = useRootAction();
+import { useMainAction, useMainValue } from "@/hooks/context/main";
+interface IWebSpeechOption {
+  onresult: (e: any) => void;
+  onstart: (e?: any) => void;
+  start(): void;
+  stop(): void;
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+}
+
+export const VoiceComponents = () => {
+  const { mikeOn } = useMainValue();
+  const { setMikeState, changeChat } = useMainAction();
   const [state, setState] = useState<boolean>(false);
+  const NativeSpeechRecognition = useRef<IWebSpeechOption>(
+    new (window.SpeechRecognition ||
+      window.webkitSpeechRecognition ||
+      window.mozSpeechRecognition ||
+      window.msSpeechRecognition)()
+  );
+  useEffect(() => {
+    NativeSpeechRecognition.current.lang = "ko";
+    NativeSpeechRecognition.current.continuous = true;
+    NativeSpeechRecognition.current.interimResults = false;
+  }, []);
   useEffect(() => {
     if (typeof window !== "undefined" && mikeOn) {
-      const NativeSpeechRecognition = new (window.SpeechRecognition ||
-        window.webkitSpeechRecognition ||
-        window.mozSpeechRecognition ||
-        window.msSpeechRecognition)();
-      NativeSpeechRecognition.lang = "ko";
-      NativeSpeechRecognition.continuous = true;
-      NativeSpeechRecognition.interimResults = false;
-      NativeSpeechRecognition.start();
-      NativeSpeechRecognition.onstart = () => {
+      NativeSpeechRecognition.current.start();
+      NativeSpeechRecognition.current.onstart = () => {
         setState(true);
       };
-      NativeSpeechRecognition.onresult = (event: any) => {
+      NativeSpeechRecognition.current.onresult = (event: any) => {
         const result = [...event.results[0]];
         setState(false);
         setMikeState();
@@ -31,7 +43,7 @@ export const VoiceComponents = ({ changeChat }: IVoiceComponentsProps) => {
             .map((e: { transcript: string }) => e.transcript)
             .join(""),
         });
-        NativeSpeechRecognition.stop();
+        NativeSpeechRecognition.current.stop();
       };
     }
   }, [mikeOn, setMikeState]);
