@@ -1,5 +1,3 @@
-import { useRootAction } from "@/hooks/context/useRootActionContext";
-import { useRootValue } from "@/hooks/context/useRootValueContext";
 import { IRootMikeProps } from "@/util/root-mike-props-interface";
 import { useEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
