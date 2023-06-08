@@ -5,7 +5,7 @@ export interface IInputQuestionProps {
   value: string;
   placeholder: string;
   onInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 export const InputQuestion = (props: IInputQuestionProps) => {
   return (
@@ -21,9 +21,11 @@ const _Input = styled.input`
   border: none;
   border-radius: 10px;
 
+  padding: 0 20px;
   background-color: ${({ theme }) => theme.color.OUTLINE};
   color: ${({ theme }) => theme.color.ON_SURFACE};
 
+  ${({ theme }) => theme.font.LABEL_LARGE}
   &::placeholder {
     color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
   }

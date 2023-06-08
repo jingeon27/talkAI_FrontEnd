@@ -20,11 +20,7 @@ export const RootInput = () => {
             onInput={(e) => setContent(e.target.value)}
             placeholder={"질문을 입력해주세요."}
             onKeyDown={(e) => {
-              if (
-                content !== "" &&
-                e.key === "Enter" &&
-                !e.nativeEvent.isComposing
-              ) {
+              if (content && e.key === "Enter" && !e.nativeEvent.isComposing) {
                 out();
               }
             }}
@@ -33,7 +29,7 @@ export const RootInput = () => {
           <_Button len={content.length}>
             <SendIcon
               onClick={() => {
-                if (content !== "") out();
+                if (content) out();
               }}
             />
           </_Button>
@@ -63,7 +59,7 @@ const _Wrapper = styled.div`
     height: 50px;
 
     border-radius: 10px;
-    padding: 0 5px 0 20px;
+    padding: 0 5px 0 0;
 
     background-color: ${({ theme }) => theme.color.OUTLINE};
     display: flex;

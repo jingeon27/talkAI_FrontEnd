@@ -1,6 +1,7 @@
 import { IChatResponse } from "@/util/chat-response.interface";
 import { keyframes, styled } from "styled-components";
 import { useChatEffect } from "@/hooks/chat";
+import { useMainValue } from "@/hooks/context/main";
 export interface IChatProps extends IChatResponse {
   key: string;
   loading?: boolean;
@@ -8,12 +9,13 @@ export interface IChatProps extends IChatResponse {
 // eslint-disable-next-line react/display-name
 export const Chat = ({ content, loading, ...props }: IChatProps) => {
   const { chat, isWriting } = useChatEffect(content);
+  const { name } = useMainValue();
   const isUser = props.role === "user";
   return (
     <>
       <_Chat {...props}>
         <div>
-          <div>{isUser ? "나 : " : "오정수 : "}</div>
+          <div>{isUser ? "나 : " : `${name} : `}</div>
           <div>
             {isUser ? content : chat}
             {(!isWriting || loading) && !isUser && <span>|</span>}

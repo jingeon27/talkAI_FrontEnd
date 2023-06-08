@@ -4,14 +4,15 @@ import { styled } from "styled-components";
 import { Chat } from "../atom/chat";
 import { RootInput } from "../atom/root-input";
 import { VoiceComponents } from "../atom/voice";
+import { SettingModal } from "../modal/setting";
 
 export const MainPage = () => {
   const { scrollRef, mikeOn, chat } = useMainValue();
-  const { loading, error } = ChatResponse();
+  const { loading } = ChatResponse();
   return (
     <>
       <_Layout ref={scrollRef}>
-        {chat.map((e, i) => (
+        {chat.slice(1, chat.length).map((e, i) => (
           <Chat {...e} key={`asmdklasdma${i}`} />
         ))}
         {loading && (
@@ -24,6 +25,7 @@ export const MainPage = () => {
         )}
       </_Layout>
       {mikeOn ? <VoiceComponents /> : <RootInput />}
+      {chat.length === 0 && <SettingModal />}
     </>
   );
 };

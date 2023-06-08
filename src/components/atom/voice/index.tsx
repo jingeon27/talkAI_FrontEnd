@@ -1,4 +1,3 @@
-import { IRootMikeProps } from "@/util/root-mike-props-interface";
 import { useEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { useMainAction, useMainValue } from "@/hooks/context/main";
