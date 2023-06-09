@@ -46,6 +46,9 @@ export const color = {
   ON_SURFACE_VARIENT: "#CAC4D0",
   OUTLINE: "#938F99",
   OUTLINE_VARIENT: "#49454F",
+  NAVER: "#03C75A",
+  KAKAO: "#FEE500",
+  GOOGLE: "#FFFFFF",
 } as const;
 declare module "styled-components" {
   export interface DefaultTheme {

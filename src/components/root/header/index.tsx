@@ -1,5 +1,7 @@
 import { ListButtonIcon } from "@/assets/listButton-icon";
 import { styled } from "styled-components";
+import Image from "next/image";
+import { logo } from "@/../public";
 export interface IHeaderProps {
   onClick: () => void;
   width: number;
@@ -8,9 +10,19 @@ export const Header = (props: IHeaderProps) => {
   return (
     <>
       <_Header>
-        <_Button {...props}>
-          <ListButtonIcon />
-        </_Button>
+        <div>
+          <_Button {...props}>
+            <ListButtonIcon />
+          </_Button>
+          <Image
+            src={logo}
+            alt={""}
+            width={140}
+            height={35}
+            object-fit="cover"
+          />
+        </div>
+
         <nav>로그인</nav>
       </_Header>
     </>
@@ -36,6 +48,14 @@ const _Header = styled.header`
     color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
     &:hover {
       color: ${({ theme }) => theme.color.ON_SURFACE};
+    }
+  }
+  > div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    > img {
+      cursor: pointer;
     }
   }
 `;

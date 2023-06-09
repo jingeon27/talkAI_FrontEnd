@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { useMainAction, useMainValue } from "@/hooks/context/main";
+
 interface IWebSpeechOption {
   onresult: (e: any) => void;
   onstart: (e?: any) => void;

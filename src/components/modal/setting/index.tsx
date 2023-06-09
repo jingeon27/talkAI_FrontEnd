@@ -34,6 +34,7 @@ export const SettingModal = () => {
               onInput={(e: ChangeEvent<HTMLInputElement>) => {
                 setState((prev) => ({ ...prev, name: e.target.value }));
               }}
+              readOnly={false}
             />
           </_name>
           <_name>
@@ -51,14 +52,17 @@ export const SettingModal = () => {
             <Button
               onClick={() => {
                 if (!state.name) {
-                  setToast("AI 챗봇의 이름을 입력하지 않으셨습니다.");
+                  setToast({
+                    comment: "AI 챗봇의 이름을 입력하지 않으셨습니다.",
+                    toastState: true,
+                  });
                 } else {
                   setChatBotAi(
                     {
                       role: "system",
                       content: `너의 이름은 ${
                         state.name
-                      }이야. 그리고 너의 역할은 ${
+                      }이야. 그게 너의 이름이라고 보면 돼. 그리고 너의 역할은 ${
                         OpenAiMode[state.content].content
                       }`,
                     },
@@ -73,7 +77,7 @@ export const SettingModal = () => {
                 setChatBotAi(
                   {
                     role: "system",
-                    content: `너의 이름은 김아무개야. 그리고 너의 역할은 ${
+                    content: `너의 이름은 김아무개야. 그리고 너의 역할에 대해 말할게 너는 그 역할대로 반드시 수행해야 돼. ${
                       OpenAiMode[state.content].content
                     }`,
                   },

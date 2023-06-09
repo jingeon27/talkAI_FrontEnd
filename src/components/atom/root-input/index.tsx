@@ -4,7 +4,8 @@ import { InputQuestion } from "../input";
 import { useState } from "react";
 import { SendIcon } from "@/assets/send-icon";
 import { useMainAction } from "@/hooks/context/main";
-export const RootInput = () => {
+import { ILoadingProps } from "@/util/loading";
+export const RootInput = ({ loading }: ILoadingProps) => {
   const [content, setContent] = useState<string>("");
   const { changeChat } = useMainAction();
   const out = () => {
@@ -24,6 +25,7 @@ export const RootInput = () => {
                 out();
               }
             }}
+            readOnly={loading}
           />
           <MikeIcon />
           <_Button len={content.length}>

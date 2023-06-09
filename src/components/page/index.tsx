@@ -1,14 +1,22 @@
 import { ChatResponse } from "@/api/chatResponse";
-import { useMainAction, useMainValue } from "@/hooks/context/main";
+import { useMainValue } from "@/hooks/context/main";
 import { styled } from "styled-components";
 import { Chat } from "../atom/chat";
 import { RootInput } from "../atom/root-input";
 import { VoiceComponents } from "../atom/voice";
 import { SettingModal } from "../modal/setting";
+import { useEffect } from "react";
+import { useRootAction } from "@/hooks/context/useRootActionContext";
 
 export const MainPage = () => {
   const { scrollRef, mikeOn, chat } = useMainValue();
-  const { loading } = ChatResponse();
+  const { setToast } = useRootAction();
+  const { loading, error } = ChatResponse();
+  useEffect(() => {
+    if (error) {
+      setToast({ comment: "에러입니다. 다시 입력해주세요.", toastState: true });
+    }
+  }, [error, setToast]);
   return (
     <>
       <_Layout ref={scrollRef}>
@@ -24,7 +32,11 @@ export const MainPage = () => {
           />
         )}
       </_Layout>
-      {mikeOn ? <VoiceComponents /> : <RootInput />}
+      {mikeOn && !loading ? (
+        <VoiceComponents />
+      ) : (
+        <RootInput {...{ loading }} />
+      )}
       {chat.length === 0 && <SettingModal />}
     </>
   );

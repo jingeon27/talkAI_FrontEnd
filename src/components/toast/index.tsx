@@ -8,7 +8,7 @@ export const Toast = () => {
   useEffect(() => {
     const interval = setTimeout(() => {
       if (toast.toastState) {
-        setToast("");
+        setToast({ comment: "", toastState: false });
       }
     }, 2700);
     return () => clearTimeout(interval);

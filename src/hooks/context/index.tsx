@@ -5,7 +5,7 @@ export interface IRootContextProviderProps {
 export interface IRootActionContext {
   changeHeaderState: (header: "main") => void;
   setLoginState: () => void;
-  setToast: (comment: string) => void;
+  setToast: (props: { comment: string; toastState: boolean }) => void;
 }
 type InitialStateType = {
   header: "main";
@@ -37,10 +37,16 @@ export const RootContextProvider = ({
       setLoginState() {
         setState((prev) => ({ ...prev, login: !prev.login }));
       },
-      setToast(comment: string) {
+      setToast({
+        comment,
+        toastState,
+      }: {
+        comment: string;
+        toastState: boolean;
+      }) {
         setState((prev) => ({
           ...prev,
-          toast: { comment, toastState: !prev.toast.toastState },
+          toast: { comment, toastState: toastState },
         }));
       },
     }),

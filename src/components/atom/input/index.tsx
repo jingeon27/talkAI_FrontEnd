@@ -6,6 +6,7 @@ export interface IInputQuestionProps {
   placeholder: string;
   onInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  readOnly: boolean;
 }
 export const InputQuestion = (props: IInputQuestionProps) => {
   return (
