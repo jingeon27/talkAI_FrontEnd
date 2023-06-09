@@ -1,10 +1,10 @@
 "use client";
-import { CustomApolloProvider } from "@/api/customApolloProvider";
-import { RootContextProvider } from "@/hooks/context";
+import { CustomApolloProvider } from "@/app/api/customApolloProvider";
+import { RootContextProvider } from "@/app/hooks/context";
 import { CustomProvider } from "@/theme";
 import { ReactNode } from "react";
 import { RootComponents } from "@/layout/components";
-import { Toast } from "@/components/toast";
+import { Toast } from "@/app/components/toast";
 export interface IRootLayoutProviderProps {
   children: ReactNode;
 }

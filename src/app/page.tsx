@@ -1,6 +1,6 @@
 "use client";
-import { MainPage } from "@/components/page";
-import { MainProvider } from "@/hooks/context/main";
+import { MainPage } from "@/app/components/pages";
+import { MainProvider } from "@/app/hooks/context/main";
 import { styled } from "styled-components";
 export default function Home() {
   return (
