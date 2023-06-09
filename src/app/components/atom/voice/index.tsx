@@ -11,7 +11,6 @@ interface IWebSpeechOption {
   continuous: boolean;
   interimResults: boolean;
 }
-
 export const VoiceComponents = () => {
   const { mikeOn } = useMainValue();
   const { setMikeState, changeChat } = useMainAction();
