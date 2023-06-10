@@ -16,18 +16,20 @@ type InitialStateType = {
   scrollRef: RefObject<HTMLDivElement> | null;
   chat: IChatResponse[];
   name: string;
+  role: string;
 };
 const initialState: InitialStateType = {
   scrollRef: null,
   mikeOn: false,
   chat: [],
-  name: "assistant",
+  name: "김아무개",
+  role: "비서",
 };
 
 interface IMainActionContext {
   changeChat: (props: IChatResponse) => void;
   setMikeState: () => void;
-  setChatBotAi: (props: IChatResponse, name: string) => void;
+  setChatBotAi: (props: IChatResponse, name: string, role: string) => void;
 }
 const MainContextAction = createContext<IMainActionContext>({
   changeChat: () => null,
@@ -46,8 +48,8 @@ export const MainProvider = ({ children }: IChildren) => {
       setMikeState() {
         setState((prev) => ({ ...prev, mikeOn: !prev.mikeOn }));
       },
-      setChatBotAi(props: IChatResponse, name: string) {
-        setState((prev) => ({ ...prev, chat: [props], name }));
+      setChatBotAi(props: IChatResponse, name: string, role: string) {
+        setState((prev) => ({ ...prev, chat: [props], name, role }));
       },
     }),
     []

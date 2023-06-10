@@ -52,4 +52,5 @@ const _Layout = styled.div`
   flex-direction: column;
 
   overflow: scroll;
+  ${({ theme }) => theme.scroll};
 `;

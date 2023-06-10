@@ -2,11 +2,55 @@ import { ListButtonIcon } from "@/app/assets/listButton-icon";
 import { styled } from "styled-components";
 import Image from "next/image";
 import { logo } from "@/../public";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Reissue } from "@/app/api/reissue";
+import { setAccessToken } from "@/app/util/storage/setAccessToken";
+import { useRootAction } from "@/app/hooks/context/useRootActionContext";
+import { getAccessToken } from "@/app/util/storage/getAccessToken";
+import { GetUserInfo } from "@/app/api/getUserInfo";
+import { useRootValue } from "@/app/hooks/context/useRootValueContext";
+import { Logout } from "@/app/util/logout";
+
 export interface IHeaderProps {
   onClick: () => void;
   width: number;
 }
 export const Header = (props: IHeaderProps) => {
+  const router = useRouter();
+  const { reissue } = Reissue();
+  const { setLoginState, setUser } = useRootAction();
+  const { login } = useRootValue();
+  const { getUserInfo } = GetUserInfo();
+
+  useEffect(() => {
+    const isCsr = typeof window !== undefined;
+    if (isCsr) {
+      if (!getAccessToken()) {
+        reissue().then((res) => {
+          setAccessToken(res.data!.reissue);
+          setLoginState();
+          getUserInfo().then((response) => {
+            setUser(response.data!.getUserInfo);
+          });
+        });
+      } else if (!login) {
+        setLoginState();
+        getUserInfo().then((response) => {
+          setUser(response.data!.getUserInfo);
+        });
+      }
+    }
+    const interval = setTimeout(() => {
+      if (isCsr) {
+        reissue().then((res) => {
+          setAccessToken(res.data!.reissue);
+        });
+      }
+    }, 85000000);
+    return () => clearTimeout(interval);
+  }, [reissue]);
+
   return (
     <>
       <_Header>
@@ -22,8 +66,18 @@ export const Header = (props: IHeaderProps) => {
             object-fit="cover"
           />
         </div>
-
-        <nav>로그인</nav>
+        {login ? (
+          <nav
+            onClick={() => {
+              Logout();
+              setLoginState();
+            }}
+          >
+            로그아웃
+          </nav>
+        ) : (
+          <nav onClick={() => router.push("/login")}>로그인</nav>
+        )}
       </_Header>
     </>
   );

@@ -2,7 +2,7 @@ import { useMainAction, useMainValue } from "@/app/hooks/context/main";
 import { ApolloError, gql, useMutation } from "@apollo/client";
 import { useEffect } from "react";
 
-const CHAT_RESPONSE_QUERY = gql`
+export const CHAT_RESPONSE_QUERY = gql`
   mutation ChatResponse($question: [ChatResponseInput!]!) {
     chatResponse(question: $question)
   }

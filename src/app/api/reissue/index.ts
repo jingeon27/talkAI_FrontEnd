@@ -1,7 +1,11 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 
-export const REISSUE = gql`
+const REISSUE = gql`
   mutation reissue {
     reissue
   }
 `;
+export const Reissue = () => {
+  const [reissue] = useMutation<{ reissue: string }>(REISSUE);
+  return { reissue };
+};

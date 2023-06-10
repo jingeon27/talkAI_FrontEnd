@@ -48,9 +48,9 @@ export const color = {
   ON_SURFACE_VARIENT: "#CAC4D0",
   OUTLINE: "#938F99",
   OUTLINE_VARIENT: "#49454F",
-  NAVER: "#03C75A",
-  KAKAO: "#FEE500",
-  GOOGLE: "#FFFFFF",
+  GREEN: "#03C75A",
+  YELLOW: "#FEE500",
+  WHITE: "#FFFFFF",
 } as const;
 export const theme = {
   color,
