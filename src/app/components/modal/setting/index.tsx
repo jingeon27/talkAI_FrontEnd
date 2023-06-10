@@ -66,7 +66,8 @@ export const SettingModal = () => {
                         OpenAiMode[state.content].content
                       }`,
                     },
-                    state.name
+                    state.name,
+                    OpenAiMode[state.content].role
                   );
                 }
               }}
@@ -77,11 +78,10 @@ export const SettingModal = () => {
                 setChatBotAi(
                   {
                     role: "system",
-                    content: `너의 이름은 김아무개야. 그리고 너의 역할에 대해 말할게 너는 그 역할대로 반드시 수행해야 돼. ${
-                      OpenAiMode[state.content].content
-                    }`,
+                    content: `너의 이름은 김아무개야. 그리고 너의 역할에 대해 말할게 너는 그 역할대로 반드시 수행해야 돼. ${OpenAiMode.ASSISTANT.content}`,
                   },
-                  "김아무개"
+                  "김아무개",
+                  OpenAiMode.ASSISTANT.role
                 );
               }}
             >
@@ -111,7 +111,8 @@ const _Table = styled.div`
       align-items: center;
       > div {
         &:first-child {
-          ${({ theme }) => theme.font.TITLE_LAGRE};
+          letter-spacing: 2px;
+          ${({ theme }) => theme.font.HEADLINE_MEDIUM};
           color: ${({ theme }) => theme.color.PRIMARY};
         }
         &:last-child {
@@ -143,7 +144,7 @@ const _ButtonLayout = styled.div`
 
   > div {
     cursor: pointer;
-    ${({ theme }) => theme.font.LABEL_MEDIUM};
+    ${({ theme }) => theme.font.BODY_MEDIUM};
     text-decoration: underline;
 
     color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};

@@ -3,6 +3,7 @@ import {
   ApolloLink,
   HttpLink,
   SuspenseCache,
+  concat,
 } from "@apollo/client";
 import {
   ApolloNextAppProvider,
@@ -10,8 +11,19 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { ReactNode } from "react";
+import { getAccessToken } from "../util/storage/getAccessToken";
 const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_API_URL,
+  uri: `${process.env.NEXT_PUBLIC_API_URL}graphql`,
+  credentials: "same-origin",
+});
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = getAccessToken();
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : document.cookie,
+    },
+  });
+  return forward(operation);
 });
 const makeClient = () =>
   new ApolloClient({
@@ -23,7 +35,7 @@ const makeClient = () =>
             }),
             httpLink,
           ])
-        : httpLink,
+        : concat(authMiddleware, httpLink),
     cache: new NextSSRInMemoryCache(),
   });
 const makeSuspenseCache = () => {
