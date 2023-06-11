@@ -1,4 +1,3 @@
-import { useRootAction } from "@/app/hooks/context/useRootActionContext";
 import { gql, useLazyQuery } from "@apollo/client";
 
 export const GET_USERINFO_QUERY = gql`

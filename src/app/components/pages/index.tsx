@@ -4,7 +4,6 @@ import { styled } from "styled-components";
 import { Chat } from "../atom/chat";
 import { RootInput } from "../atom/root-input";
 import { VoiceComponents } from "../atom/voice";
-import { SettingModal } from "../modal/setting";
 import { useEffect } from "react";
 import { useRootAction } from "@/app/hooks/context/useRootActionContext";
 
@@ -37,7 +36,6 @@ export const MainPage = () => {
       ) : (
         <RootInput {...{ loading }} />
       )}
-      {chat.length === 0 && <SettingModal />}
     </>
   );
 };

@@ -18,9 +18,9 @@ export const LoginModal = () => {
           {loginArray.map((e) => (
             <_StyledLink
               href={`${process.env.NEXT_PUBLIC_API_URL}login/${e.path}`}
-              key={`${e.src}`}
+              key={`${e.path}`}
             >
-              <_Button bgColor={e.bgColor} color={e.color}>
+              <_Button bgcolor={e.bgColor} color={e.color}>
                 <Image
                   src={e.src}
                   alt={e.text}
@@ -78,7 +78,7 @@ const _StyledLink = styled(Link)`
   text-decoration: none;
 `;
 const _Button = styled.button<{
-  bgColor: bgColorType;
+  bgcolor: bgColorType;
   color: colorType;
 }>`
   width: 400px;
@@ -90,7 +90,7 @@ const _Button = styled.button<{
 
   display: flex;
   align-items: center;
-  background-color: ${({ theme, bgColor }) => theme.color[bgColor]};
+  background-color: ${({ theme, bgcolor }) => theme.color[bgcolor]};
 
   > div {
     &:last-child {
