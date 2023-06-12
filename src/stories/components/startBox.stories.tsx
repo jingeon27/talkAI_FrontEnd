@@ -9,7 +9,7 @@ const meta: Meta<typeof StartBox> = {
 export default meta;
 type Story = StoryObj<typeof StartBox>;
 
-export const HeaderComponent: Story = {
+export const Start: Story = {
   args: {
     name: "황진성",
     role: "찐따",
