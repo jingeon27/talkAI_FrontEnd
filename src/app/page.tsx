@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <MainProvider>
         <_Main>
-          <MainPage />
+          <MainPage isMain={true} />
         </_Main>
       </MainProvider>
     </>

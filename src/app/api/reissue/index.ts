@@ -5,7 +5,7 @@ const REISSUE = gql`
     reissue
   }
 `;
-export const Reissue = () => {
+export const useReissue = () => {
   const [reissue] = useMutation<{ reissue: string }>(REISSUE);
   return { reissue };
 };

@@ -1,31 +1,28 @@
 import { styled } from "styled-components";
 import { List } from "../../atom/list-item";
+import { GetConversationContent } from "@/app/api/getChatList";
+import { NewChat } from "../../atom/new-chat";
+import { useRouter } from "next/navigation";
 
 export const MainMenu = () => {
+  const { data, loading, error } = GetConversationContent();
+  console.log(data);
+  const router = useRouter();
   return (
     <>
       <_Ul>
-        <List
-          onClick={() => {
-            console.log("asdf");
-          }}
-          key={"asdf1qwes"}
-          name={"dd"}
-        />
-        <List
-          onClick={() => {
-            console.log("asdf");
-          }}
-          name={"dd"}
-          key={"asdf2csdcw"}
-        />
-        <List
-          onClick={() => {
-            console.log("asdf");
-          }}
-          name={"dd"}
-          key={"asdf3vfddsfd"}
-        />
+        <NewChat onClick={() => {}} />
+        {!loading &&
+          !error &&
+          data!.chatList.map((e) => (
+            <List
+              onClick={() => {
+                router.push(e.id);
+              }}
+              name={e.title}
+              key={e.id}
+            />
+          ))}
       </_Ul>
     </>
   );

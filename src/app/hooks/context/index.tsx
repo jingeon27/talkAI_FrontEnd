@@ -19,7 +19,7 @@ type SetToastArgsType = typeof initialState.toast;
 type SetUserType = typeof initialState.user;
 export interface IRootActionContext {
   changeHeaderState: (header: "main") => void;
-  setLoginState: () => void;
+  setLoginState: (login: boolean) => void;
   setToast: (props: SetToastArgsType) => void;
   setUser: ({ name, email }: SetUserType) => void;
 }
@@ -40,8 +40,8 @@ export const RootContextProvider = ({
       changeHeaderState(header: "main") {
         setState((prev) => ({ ...prev, header }));
       },
-      setLoginState() {
-        setState((prev) => ({ ...prev, login: !prev.login }));
+      setLoginState(login: boolean) {
+        setState((prev) => ({ ...prev, login }));
       },
       setToast(toast: SetToastArgsType) {
         setState((prev) => ({

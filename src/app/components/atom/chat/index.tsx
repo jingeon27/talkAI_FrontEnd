@@ -5,11 +5,12 @@ import { useMainValue } from "@/app/hooks/context/main";
 import { useRootValue } from "@/app/hooks/context/useRootValueContext";
 export interface IChatProps extends IChatResponse {
   key: string;
+  initial: boolean;
   loading?: boolean;
 }
 
-export const Chat = ({ content, loading, ...props }: IChatProps) => {
-  const { chat, isWriting } = useChatEffect(content);
+export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
+  const { chat, isWriting } = useChatEffect(initial ? "" : content);
   const { name } = useMainValue();
   const { user, login } = useRootValue();
   const isUser = props.role === "user";
@@ -21,8 +22,8 @@ export const Chat = ({ content, loading, ...props }: IChatProps) => {
             {isUser ? `${login ? `${user.name}(나)` : "나"} : ` : `${name} : `}
           </div>
           <div>
-            {isUser ? content : chat}
-            {(!isWriting || loading) && !isUser && <span>|</span>}
+            {initial ? content : isUser ? content : chat}
+            {!initial && (!isWriting || loading) && !isUser && <span>|</span>}
           </div>
         </div>
       </_Chat>
@@ -40,7 +41,7 @@ const ChatAnimate = keyframes`
         opacity: 0;
     }
 `;
-const _Chat = styled.div<Omit<IChatProps, "content">>`
+const _Chat = styled.div<Omit<IChatProps, "content" | "loading" | "initial">>`
   width: 100%;
   ${({ theme }) => theme.font.BODY_LARGE};
   background-color: ${({ theme, role }) =>

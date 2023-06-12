@@ -4,11 +4,11 @@ import Image from "next/image";
 import { logo } from "@/../public";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Reissue } from "@/app/api/reissue";
+import { useReissue } from "@/app/api/reissue";
 import { setAccessToken } from "@/app/util/storage/setAccessToken";
 import { useRootAction } from "@/app/hooks/context/useRootActionContext";
 import { getAccessToken } from "@/app/util/storage/getAccessToken";
-import { GetUserInfo } from "@/app/api/getUserInfo";
+import { useGetUserInfo } from "@/app/api/getUserInfo";
 import { useRootValue } from "@/app/hooks/context/useRootValueContext";
 import { Logout } from "@/app/util/logout";
 
@@ -18,27 +18,37 @@ export interface IHeaderProps {
 }
 export const Header = (props: IHeaderProps) => {
   const router = useRouter();
-  const { reissue } = Reissue();
+  const { reissue } = useReissue();
   const { setLoginState, setUser } = useRootAction();
   const { login } = useRootValue();
-  const { getUserInfo } = GetUserInfo();
+  const { getUserInfo } = useGetUserInfo();
 
   useEffect(() => {
     const isCsr = typeof window !== undefined;
     if (isCsr) {
       if (!getAccessToken()) {
-        reissue().then((res) => {
-          setAccessToken(res.data!.reissue);
-          setLoginState();
-          getUserInfo().then((response) => {
-            setUser(response.data!.getUserInfo);
+        reissue()
+          .then((res) => {
+            setAccessToken(res.data!.reissue);
+            setLoginState(true);
+            getUserInfo().then((response) => {
+              setUser(response.data!.getUserInfo);
+            });
+          })
+          .catch(() => {
+            Logout();
+            setLoginState(false);
           });
-        });
       } else if (!login) {
-        setLoginState();
-        getUserInfo().then((response) => {
-          setUser(response.data!.getUserInfo);
-        });
+        setLoginState(true);
+        getUserInfo()
+          .then((response) => {
+            setUser(response.data!.getUserInfo);
+          })
+          .catch(() => {
+            Logout();
+            setLoginState(false);
+          });
       }
     }
     const interval = setTimeout(() => {
@@ -58,19 +68,21 @@ export const Header = (props: IHeaderProps) => {
           <_Button {...props}>
             <ListButtonIcon />
           </_Button>
-          <Image
-            src={logo}
-            alt={""}
-            width={140}
-            height={35}
-            object-fit="cover"
-          />
+          <a href="/">
+            <Image
+              src={logo}
+              alt={""}
+              width={140}
+              height={35}
+              object-fit="cover"
+            />
+          </a>
         </div>
         {login ? (
           <nav
             onClick={() => {
               Logout();
-              setLoginState();
+              setLoginState(false);
             }}
           >
             로그아웃

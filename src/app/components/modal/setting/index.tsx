@@ -58,14 +58,16 @@ export const SettingModal = () => {
                   });
                 } else {
                   setChatBotAi(
-                    {
-                      role: "system",
-                      content: `너의 이름은 ${
-                        state.name
-                      }이야. 그게 너의 이름이라고 보면 돼. 그리고 너의 역할은 ${
-                        OpenAiMode[state.content].content
-                      }`,
-                    },
+                    [
+                      {
+                        role: "system",
+                        content: `너의 이름은 ${
+                          state.name
+                        }이야. 그게 너의 이름이라고 보면 돼. 그리고 너의 역할은 ${
+                          OpenAiMode[state.content].content
+                        }`,
+                      },
+                    ],
                     state.name,
                     OpenAiMode[state.content].role
                   );
@@ -76,10 +78,12 @@ export const SettingModal = () => {
             <div
               onClick={() => {
                 setChatBotAi(
-                  {
-                    role: "system",
-                    content: `너의 이름은 김아무개야. 그리고 너의 역할에 대해 말할게 너는 그 역할대로 반드시 수행해야 돼. ${OpenAiMode.ASSISTANT.content}`,
-                  },
+                  [
+                    {
+                      role: "system",
+                      content: `너의 이름은 김아무개야. 그리고 너의 역할에 대해 말할게 너는 그 역할대로 반드시 수행해야 돼. ${OpenAiMode.ASSISTANT.content}`,
+                    },
+                  ],
                   "김아무개",
                   OpenAiMode.ASSISTANT.role
                 );
