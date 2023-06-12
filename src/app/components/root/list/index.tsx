@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 export const MainMenu = () => {
   const { data, loading, error } = GetConversationContent();
+  console.log(data);
   const router = useRouter();
   return (
     <>
@@ -16,10 +17,10 @@ export const MainMenu = () => {
           data!.chatList.map((e) => (
             <List
               onClick={() => {
-                router.push(`${e.id}`);
+                router.push(e.id);
               }}
-              key={e.id}
               name={e.title}
+              key={e.id}
             />
           ))}
       </_Ul>

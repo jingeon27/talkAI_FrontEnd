@@ -18,7 +18,7 @@ export const LoginModal = () => {
           {loginArray.map((e) => (
             <_StyledLink
               href={`${process.env.NEXT_PUBLIC_API_URL}login/${e.path}`}
-              key={`${e.path}`}
+              key={e.path}
             >
               <_Button bgcolor={e.bgColor} color={e.color}>
                 <Image

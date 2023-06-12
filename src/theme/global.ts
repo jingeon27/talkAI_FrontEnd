@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.color.SURFACE_VARIENT};
     overflow-x: hidden;
 
+    box-sizing: border-box;
     margin: 0;
  }
 `;

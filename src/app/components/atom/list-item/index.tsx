@@ -9,11 +9,19 @@ export const List = (props: IListProps) => (
   <>
     <_List {...props}>
       <ChatIcon />
-      {props.name}
+      <div>{props.name}</div>
     </_List>
   </>
 );
 
 const _List = styled(_Template)`
-  overflow: hidden;
+  width: 250px;
+  box-sizing: border-box;
+  > div {
+    color: ${({ theme }) => theme.color.ON_BACKGROUND};
+    ${({ theme }) => theme.font.LABEL_LARGE};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;

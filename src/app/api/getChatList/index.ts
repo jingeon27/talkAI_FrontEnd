@@ -16,6 +16,5 @@ export const GetConversationContent = () => {
       id: string;
     }[];
   }>(CHAT_LIST);
-  console.log(data);
   return { data, loading, error };
 };

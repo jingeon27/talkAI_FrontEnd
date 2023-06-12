@@ -14,7 +14,6 @@ export const NewChat = (props: INewChat) => (
 
 export const _Template = styled.li`
   list-style: none;
-  width: 100%;
   height: 60px;
 
   display: flex;
@@ -24,9 +23,6 @@ export const _Template = styled.li`
   gap: 20px;
 
   cursor: pointer;
-
-  color: ${({ theme }) => theme.color.ON_BACKGROUND};
-  ${({ theme }) => theme.font.LABEL_LARGE};
 
   &:hover {
     background-color: ${({ theme }) => theme.color.OUTLINE};
@@ -47,4 +43,6 @@ const _NewChat = styled(_Template)`
   }
   border: 1px solid ${({ theme }) => theme.color.ON_BACKGROUND};
   border-radius: 5px;
+  color: ${({ theme }) => theme.color.ON_BACKGROUND};
+  ${({ theme }) => theme.font.LABEL_LARGE};
 `;

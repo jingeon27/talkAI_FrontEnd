@@ -8,7 +8,7 @@ export const GET_USERINFO_QUERY = gql`
     }
   }
 `;
-export const GetUserInfo = () => {
+export const useGetUserInfo = () => {
   const [getUserInfo] = useLazyQuery<{
     getUserInfo: { email: string; name: string };
   }>(GET_USERINFO_QUERY);

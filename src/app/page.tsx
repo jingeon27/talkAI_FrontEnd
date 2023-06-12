@@ -1,12 +1,20 @@
 "use client";
+import { MainPage } from "@/app/components/pages";
 import { MainProvider } from "@/app/hooks/context/main";
-import { RootPage } from "./components/pages/root";
+import { styled } from "styled-components";
 export default function Home() {
   return (
     <>
       <MainProvider>
-        <RootPage />
+        <_Main>
+          <MainPage isMain={true} />
+        </_Main>
       </MainProvider>
     </>
   );
 }
+const _Main = styled.main`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+`;
