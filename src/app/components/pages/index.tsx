@@ -7,11 +7,14 @@ import { VoiceComponents } from "../atom/voice";
 import { SettingModal } from "../modal/setting";
 import { useEffect } from "react";
 import { useRootAction } from "@/app/hooks/context/useRootActionContext";
+import { StartBox } from "../atom/start-box";
+import { useRootValue } from "@/app/hooks/context/useRootValueContext";
 export interface IMainPageProps {
   isMain: boolean;
 }
 export const MainPage = ({ isMain }: IMainPageProps) => {
-  const { scrollRef, mikeOn, chat, initial } = useMainValue();
+  const { scrollRef, mikeOn, chat, initial, name, role } = useMainValue();
+  const { user } = useRootValue();
   const { setToast } = useRootAction();
   const { loading, error } = useChatResponse();
   useEffect(() => {
@@ -22,6 +25,7 @@ export const MainPage = ({ isMain }: IMainPageProps) => {
   return (
     <>
       <_Layout ref={scrollRef}>
+        {chat.length === 1 && <StartBox {...{ name, role, user }} />}
         {chat.slice(1, initial).map((e, i) => (
           <Chat {...e} key={`asmdklasdma${i}`} initial={true} />
         ))}
@@ -56,7 +60,7 @@ const _Layout = styled.div`
 
   display: flex;
   flex-direction: column;
-
+  align-items: center;
   overflow: scroll;
   ${({ theme }) => theme.scroll};
 `;
