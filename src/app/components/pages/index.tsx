@@ -61,6 +61,7 @@ const _Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   overflow: scroll;
   ${({ theme }) => theme.scroll};
 `;

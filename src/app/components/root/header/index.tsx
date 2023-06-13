@@ -11,6 +11,7 @@ import { getAccessToken } from "@/app/util/storage/getAccessToken";
 import { useGetUserInfo } from "@/app/api/getUserInfo";
 import { useRootValue } from "@/app/hooks/context/useRootValueContext";
 import { Logout } from "@/app/util/logout";
+import Link from "next/link";
 
 export interface IHeaderProps {
   onClick: () => void;
@@ -85,7 +86,7 @@ export const Header = (props: IHeaderProps) => {
               setLoginState(false);
             }}
           >
-            로그아웃
+            <a href="/"> 로그아웃</a>
           </nav>
         ) : (
           <nav onClick={() => router.push("/login")}>로그인</nav>
@@ -114,6 +115,10 @@ const _Header = styled.header`
     color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
     &:hover {
       color: ${({ theme }) => theme.color.ON_SURFACE};
+    }
+    > a {
+      text-decoration: none;
+      color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
     }
   }
   > div {

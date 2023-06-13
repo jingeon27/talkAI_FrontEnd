@@ -18,6 +18,29 @@ export const SettingModal = () => {
   });
   const { setChatBotAi } = useMainAction();
   const { setToast } = useRootAction();
+  const submit = () => {
+    if (!state.name) {
+      setToast({
+        comment: "AI 챗봇의 이름을 입력하지 않으셨습니다.",
+        toastState: true,
+      });
+    } else {
+      setChatBotAi(
+        [
+          {
+            role: "system",
+            content: `너의 이름은 ${
+              state.name
+            }이야. 그게 너의 이름이라고 보면 돼. 그리고 너의 역할은 ${
+              OpenAiMode[state.content].content
+            }`,
+          },
+        ],
+        state.name,
+        OpenAiMode[state.content].role
+      );
+    }
+  };
   return (
     <>
       <ModalLayout>
@@ -26,17 +49,6 @@ export const SettingModal = () => {
             <div>AI 챗봇 설정</div>
             <div>챗봇의 초기 이름과 성격을 설정할 수 있습니다.</div>
           </div>
-          <_name>
-            <div>이름</div>
-            <InputQuestion
-              value={state.name}
-              placeholder={"이름을 입력해주세요."}
-              onInput={(e: ChangeEvent<HTMLInputElement>) => {
-                setState((prev) => ({ ...prev, name: e.target.value }));
-              }}
-              readOnly={false}
-            />
-          </_name>
           <_name>
             <div>성격</div>
             <Select now={OpenAiMode[state.content].role}>
@@ -48,30 +60,26 @@ export const SettingModal = () => {
               />
             </Select>
           </_name>
+          <_name>
+            <div>이름</div>
+            <InputQuestion
+              value={state.name}
+              placeholder={"이름을 입력해주세요."}
+              onInput={(e: ChangeEvent<HTMLInputElement>) => {
+                setState((prev) => ({ ...prev, name: e.target.value }));
+              }}
+              readOnly={false}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.nativeEvent.isComposing) {
+                  submit();
+                }
+              }}
+            />
+          </_name>
           <_ButtonLayout>
             <Button
               onClick={() => {
-                if (!state.name) {
-                  setToast({
-                    comment: "AI 챗봇의 이름을 입력하지 않으셨습니다.",
-                    toastState: true,
-                  });
-                } else {
-                  setChatBotAi(
-                    [
-                      {
-                        role: "system",
-                        content: `너의 이름은 ${
-                          state.name
-                        }이야. 그게 너의 이름이라고 보면 돼. 그리고 너의 역할은 ${
-                          OpenAiMode[state.content].content
-                        }`,
-                      },
-                    ],
-                    state.name,
-                    OpenAiMode[state.content].role
-                  );
-                }
+                submit();
               }}
               text={"확인"}
             />
