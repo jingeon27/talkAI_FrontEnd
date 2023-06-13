@@ -1,7 +1,7 @@
 import StyledComponentsRegistry from "./resistry";
 import { Roboto } from "next/font/google";
 import { RootLayoutComponents } from "@/layout";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 
 const roboto = Roboto({
   weight: ["400", "500"],
@@ -13,9 +13,12 @@ const roboto = Roboto({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" className={roboto.className}>
+      <link rel="icon" href="/assets/favicon.png" />
       <body>
         <StyledComponentsRegistry>
-          <RootLayoutComponents>{children}</RootLayoutComponents>
+          <Suspense>
+            <RootLayoutComponents>{children}</RootLayoutComponents>
+          </Suspense>
         </StyledComponentsRegistry>
       </body>
     </html>

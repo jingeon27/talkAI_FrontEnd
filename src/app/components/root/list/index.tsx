@@ -17,7 +17,7 @@ export const MainMenu = () => {
           data!.chatList.map((e) => (
             <List
               onClick={() => {
-                router.push(e.id);
+                router.push(`chat/${e.id}`);
               }}
               name={e.title}
               key={e.id}

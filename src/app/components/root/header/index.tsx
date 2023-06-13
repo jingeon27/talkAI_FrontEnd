@@ -85,7 +85,7 @@ export const Header = (props: IHeaderProps) => {
               setLoginState(false);
             }}
           >
-            로그아웃
+            <a href="/"> 로그아웃</a>
           </nav>
         ) : (
           <nav onClick={() => router.push("/login")}>로그인</nav>
@@ -114,6 +114,10 @@ const _Header = styled.header`
     color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
     &:hover {
       color: ${({ theme }) => theme.color.ON_SURFACE};
+    }
+    > a {
+      text-decoration: none;
+      color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
     }
   }
   > div {

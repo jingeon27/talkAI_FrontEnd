@@ -1,4 +1,3 @@
-"use client";
 import { useMainAction, useMainValue } from "@/app/hooks/context/main";
 import { ApolloError, gql, useMutation } from "@apollo/client";
 import { useEffect } from "react";
@@ -40,7 +39,6 @@ export const useChatResponse = (): {
               const id = res.data!.createChat.id;
               setID(id);
               updateChat({ variables: { id, chat } }).then((res) => {
-                console.log(res);
                 changeChat({
                   role: "assistant",
                   content: res.data!.updateChat.content,
@@ -49,7 +47,6 @@ export const useChatResponse = (): {
             });
           } else {
             updateChat({ variables: { id, chat } }).then((res) => {
-              console.log(res);
               changeChat({
                 role: "assistant",
                 content: res.data!.updateChat.content,
@@ -57,7 +54,6 @@ export const useChatResponse = (): {
             });
           }
         } else {
-          console.log("asdf");
           chatResponse({
             variables: { chat },
           }).then((res) =>
