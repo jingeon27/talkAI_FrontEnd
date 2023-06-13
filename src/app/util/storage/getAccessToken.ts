@@ -1,5 +1,7 @@
 export const getAccessToken = () => {
-  if (typeof window !== undefined) {
-    return sessionStorage.getItem("token") ?? false;
+  try {
+    return typeof window !== undefined ? sessionStorage.getItem("token") : null;
+  } catch {
+    return null;
   }
 };

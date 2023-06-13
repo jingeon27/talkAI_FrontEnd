@@ -1,4 +1,3 @@
-"use client";
 import { useMainAction, useMainValue } from "@/app/hooks/context/main";
 import { ApolloError, gql, useMutation } from "@apollo/client";
 import { useEffect } from "react";

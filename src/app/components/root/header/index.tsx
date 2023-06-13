@@ -11,7 +11,6 @@ import { getAccessToken } from "@/app/util/storage/getAccessToken";
 import { useGetUserInfo } from "@/app/api/getUserInfo";
 import { useRootValue } from "@/app/hooks/context/useRootValueContext";
 import { Logout } from "@/app/util/logout";
-import Link from "next/link";
 
 export interface IHeaderProps {
   onClick: () => void;
