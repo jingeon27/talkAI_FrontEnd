@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { NewChat } from "@/app/components/atom/new-chat";
+import { NewChat } from "@/components/atom/new-chat";
 
 const meta: Meta<typeof NewChat> = {
   title: "Components/NewChat",

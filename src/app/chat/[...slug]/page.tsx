@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
-import { MainPage } from "@/app/components/pages";
-import { useGetBeforeChat } from "@/app/api/getBeforeChat";
-import { useMainAction, useMainValue } from "@/app/hooks/context/main";
+import { MainPage } from "@/components/pages";
+import { useGetBeforeChat } from "@/api/getBeforeChat";
+import { useMainAction, useMainValue } from "@/hooks/context/main";
 import { styled } from "styled-components";
 
 export default function IDPage({ params }: { params: { slug: string } }) {
