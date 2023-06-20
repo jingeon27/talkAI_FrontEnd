@@ -1,7 +1,8 @@
 import StyledComponentsRegistry from "./resistry";
 import { Roboto } from "next/font/google";
 import { RootLayoutComponents } from "@/layout";
-import { ReactNode, Suspense } from "react";
+import { Suspense } from "react";
+import { IChildren } from "@/util/children";
 
 const roboto = Roboto({
   weight: ["400", "500"],
@@ -10,15 +11,16 @@ const roboto = Roboto({
   display: "swap",
 });
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: IChildren) {
   return (
     <html lang="ko" className={roboto.className}>
       <link rel="icon" href="/assets/favicon.png" />
+      <title>TalkAi</title>
       <body>
         <StyledComponentsRegistry>
-          <Suspense>
-            <RootLayoutComponents>{children}</RootLayoutComponents>
-          </Suspense>
+          <RootLayoutComponents>
+            <Suspense>{children}</Suspense>
+          </RootLayoutComponents>
         </StyledComponentsRegistry>
       </body>
     </html>

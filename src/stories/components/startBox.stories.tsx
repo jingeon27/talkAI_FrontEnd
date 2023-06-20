@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { StartBox } from "@/app/components/atom/start-box";
+import { StartBox } from "@/components/atom/start-box";
 
 const meta: Meta<typeof StartBox> = {
   title: "Components/StartBox",
