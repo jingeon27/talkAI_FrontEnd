@@ -5,16 +5,19 @@ export const CHAT_LIST = gql`
     chatList {
       id
       title
+      date
     }
   }
 `;
 
 export const GetConversationContent = () => {
-  const { data, loading, error } = useQuery<{
+  const { data, loading, error, refetch } = useQuery<{
     chatList: {
       title: string;
       id: string;
+      date: number;
     }[];
   }>(CHAT_LIST);
-  return { data, loading, error };
+  console.log(data);
+  return { data, loading, error, refetch };
 };

@@ -44,10 +44,11 @@ export const Header = (props: IHeaderProps) => {
         getUserInfo()
           .then((response) => {
             setUser(response.data!.getUserInfo);
+            console.log(response);
           })
           .catch(() => {
-            Logout();
             setLoginState(false);
+            Logout();
           });
       }
     }

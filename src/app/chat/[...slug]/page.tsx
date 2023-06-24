@@ -2,21 +2,14 @@
 import { useEffect } from "react";
 import { MainPage } from "@/components/pages";
 import { useGetBeforeChat } from "@/api/getBeforeChat";
-import { useMainAction, useMainValue } from "@/hooks/context/main";
+import { useMainAction } from "@/hooks/context/main";
 import { styled } from "styled-components";
 
-export default function IDPage({ params }: { params: { slug: string } }) {
-  const { data, loading } = useGetBeforeChat(params.slug[0]);
-  const { chat } = useMainValue();
+export default function ServerPage({ params }: { params: { slug: string } }) {
+  const { data, loading, error } = useGetBeforeChat(params.slug[0]);
   const { setChatBotAi, setInitial, setID } = useMainAction();
   useEffect(() => {
     if (data !== undefined) {
-      console.log(
-        data?.getBeforeChat.map((e) => ({
-          role: e.role,
-          content: e.content,
-        }))
-      );
       setChatBotAi(
         data.getBeforeChat.map((e) => ({ role: e.role, content: e.content })),
         data.getOpenAi.name,
@@ -25,14 +18,10 @@ export default function IDPage({ params }: { params: { slug: string } }) {
       setID(params.slug[0]);
       setInitial(data.getBeforeChat.length);
     }
-
-    console.log(chat);
-    console.log(
-      data?.getBeforeChat.map((e) => ({ role: e.role, content: e.content }))
-    );
-    console.log(data?.getBeforeChat);
   }, [loading, data]);
-  console.log(params);
+
+  if (loading) return loading;
+  if (error) return error;
   return (
     <>
       <_Main>
