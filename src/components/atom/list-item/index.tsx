@@ -17,6 +17,7 @@ export const List = (props: IListProps) => (
 const _List = styled(_Template)`
   width: 250px;
   box-sizing: border-box;
+  background-color: ${({ theme }) => theme.color.BACKGROUND};
   > div {
     color: ${({ theme }) => theme.color.ON_BACKGROUND};
     ${({ theme }) => theme.font.LABEL_LARGE};

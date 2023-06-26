@@ -1,11 +1,9 @@
 import { styled } from "styled-components";
-export interface INewChat {
-  onClick: () => void;
-}
-export const NewChat = (props: INewChat) => (
+import { List } from "../list-item";
+export const NewChat = () => (
   <>
     <_Layout href="/">
-      <_NewChat {...props}>
+      <_NewChat>
         <div>+</div>새 채팅 시작하기
       </_NewChat>
     </_Layout>

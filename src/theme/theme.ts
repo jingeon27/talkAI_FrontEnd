@@ -55,14 +55,5 @@ export const color = {
 export const theme = {
   color,
   font,
-  scroll: `scroll-behavior: smooth;
-   ::-webkit-scrollbar {
-    background-color: ${color.ON_SURFACE};
-    width: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: ${color.SURFACE};
-      border-radius: 3px;
-      width: 10px;
-    }`,
+  scroll: `scroll-behavior: smooth;`,
 };

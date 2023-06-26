@@ -31,7 +31,7 @@ export const SettingModal = () => {
             role: "system",
             content: `너의 이름은 ${
               state.name
-            }이야. 그게 너의 이름이라고 보면 돼. ${
+            }이야. 그게 너의 이름이라고 보면 돼.그리고 너는 이런식으로 행동해야 돼 ${
               OpenAiMode[state.content].content
             }`,
           },

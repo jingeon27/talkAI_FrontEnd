@@ -3,6 +3,7 @@ import { ApolloError, gql, useMutation } from "@apollo/client";
 import { useEffect } from "react";
 import { useCreateChat } from "../createChat";
 import { getAccessToken } from "@/util/storage/getAccessToken";
+import { GetConversationContent } from "../getChatList";
 
 export const CHAT_RESPONSE_MUTATION = gql`
   mutation ChatResponse($chat: [ChatResponseInput!]!) {
@@ -23,6 +24,7 @@ export const useChatResponse = (): {
   const { chat, id } = useMainValue();
   const { changeChat, setID } = useMainAction();
   const { createChat } = useCreateChat();
+  const { refetch, data } = GetConversationContent();
   const [chatResponse, handling] = useMutation<{
     chatResponse: string;
   }>(CHAT_RESPONSE_MUTATION);
@@ -31,6 +33,7 @@ export const useChatResponse = (): {
   }>(UPDATE_RESPONSE_MUTATION);
   const isToken = getAccessToken();
   useEffect(() => {
+    console.log(chat);
     if (chat.at(-1)?.role === "user") {
       {
         if (isToken) {
@@ -43,6 +46,9 @@ export const useChatResponse = (): {
                   role: "assistant",
                   content: res.data!.updateChat.content,
                 });
+                if (data) {
+                  refetch();
+                }
               });
             });
           } else {
@@ -51,6 +57,9 @@ export const useChatResponse = (): {
                 role: "assistant",
                 content: res.data!.updateChat.content,
               });
+              if (data) {
+                refetch();
+              }
             });
           }
         } else {

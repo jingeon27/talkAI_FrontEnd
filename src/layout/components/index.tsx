@@ -1,6 +1,8 @@
 "use client";
 import { Header } from "@/components/root/header";
 import { Section } from "@/components/root/section";
+import { useRootAction } from "@/hooks/context/useRootActionContext";
+import { useRootValue } from "@/hooks/context/useRootValueContext";
 import { ReactNode, useState } from "react";
 
 export interface IRootComponentsProps {
@@ -9,8 +11,14 @@ export interface IRootComponentsProps {
 
 export const RootComponents = ({ children }: IRootComponentsProps) => {
   const [active, setActive] = useState<boolean>(false);
+  const { login } = useRootValue();
+  const { setToast } = useRootAction();
   const onClick = () => {
-    setActive((prev) => !prev);
+    if (login) {
+      setActive((prev) => !prev);
+    } else {
+      setToast({ comment: "로그인이 필요합니다.", toastState: true });
+    }
   };
   return (
     <>

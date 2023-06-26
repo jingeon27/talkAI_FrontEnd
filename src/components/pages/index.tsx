@@ -22,7 +22,6 @@ export const MainPage = ({ isMain }: IMainPageProps) => {
       setToast({ comment: "에러입니다. 다시 입력해주세요.", toastState: true });
     }
   }, [error, setToast]);
-  console.log(chat);
   return (
     <>
       <_Layout ref={scrollRef}>
@@ -63,6 +62,6 @@ const _Layout = styled.div`
   flex-direction: column;
   align-items: center;
 
-  overflow: scroll;
   ${({ theme }) => theme.scroll};
+  overflow-x: hidden;
 `;

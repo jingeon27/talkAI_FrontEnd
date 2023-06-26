@@ -5,9 +5,10 @@ export const GlobalStyle = createGlobalStyle`
     height: 100vh;
 
     background-color: ${({ theme }) => theme.color.SURFACE_VARIENT};
-    overflow-x: hidden;
 
     box-sizing: border-box;
     margin: 0;
+    ${({ theme }) => theme.scroll};
+    overflow-x: hidden;
  }
 `;
