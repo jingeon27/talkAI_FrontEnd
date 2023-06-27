@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { List } from "../list-item";
+
 export const NewChat = () => (
   <>
     <_Layout href="/">
