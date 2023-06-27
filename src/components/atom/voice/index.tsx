@@ -1,31 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { useMainAction, useMainValue } from "@/hooks/context/main";
+import { useSpeech } from "@/hooks/speech";
 
-interface IWebSpeechOption {
-  onresult: (e: any) => void;
-  onstart: (e?: any) => void;
-  start(): void;
-  stop(): void;
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-}
 export const VoiceComponents = () => {
   const { mikeOn } = useMainValue();
   const { setMikeState, changeChat } = useMainAction();
   const [state, setState] = useState<boolean>(false);
-  const NativeSpeechRecognition = useRef<IWebSpeechOption>(
-    new (window.SpeechRecognition ||
-      window.webkitSpeechRecognition ||
-      window.mozSpeechRecognition ||
-      window.msSpeechRecognition)()
-  );
-  useEffect(() => {
-    NativeSpeechRecognition.current.lang = "ko";
-    NativeSpeechRecognition.current.continuous = true;
-    NativeSpeechRecognition.current.interimResults = false;
-  }, []);
+  const { NativeSpeechRecognition } = useSpeech();
   useEffect(() => {
     if (typeof window !== "undefined" && mikeOn) {
       NativeSpeechRecognition.current.start();
@@ -45,6 +27,7 @@ export const VoiceComponents = () => {
         NativeSpeechRecognition.current.stop();
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mikeOn, setMikeState]);
   return (
     <>
