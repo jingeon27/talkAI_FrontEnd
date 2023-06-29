@@ -74,6 +74,7 @@ export const useChatResponse = (): {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chat]);
 
   return {

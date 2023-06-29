@@ -60,6 +60,7 @@ export const Header = (props: IHeaderProps) => {
       }
     }, 85000000);
     return () => clearTimeout(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reissue]);
 
   return (

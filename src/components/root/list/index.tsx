@@ -7,7 +7,6 @@ import { useDateTime } from "@/hooks/list";
 
 export const MainMenu = () => {
   const { data, loading, error } = GetConversationContent();
-  console.log(data);
   const router = useRouter();
   const { isEqual, yearMonthDate, returnDateFormat } = useDateTime();
   return (
