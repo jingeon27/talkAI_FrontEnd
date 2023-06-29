@@ -35,9 +35,8 @@ const ErrorPage = () => {
 };
 export default ErrorPage;
 
-const MainDiv = styled.div`
-  width: 100vw;
-  height: 100vh;
+const MainDiv = styled.main`
+  flex-grow: 1;
   position: relative;
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
 `;
