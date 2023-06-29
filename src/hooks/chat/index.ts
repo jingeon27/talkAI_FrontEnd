@@ -21,6 +21,7 @@ export const useChatEffect = (content: string): useChatEffectType => {
     }, 30);
 
     return () => clearTimeout(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.chat]);
   return state;
 };

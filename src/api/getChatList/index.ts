@@ -15,7 +15,7 @@ export const GetConversationContent = () => {
     chatList: {
       title: string;
       id: string;
-      date: Date;
+      date: number;
     }[];
   }>(CHAT_LIST);
   return { data, loading, error, refetch };

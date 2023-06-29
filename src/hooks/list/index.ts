@@ -21,7 +21,7 @@ export const useDateTime = () => {
       a.month === b.month && a.year === b.year && a.date - minus === b.date
     );
   };
-  const returnDateFormat = (item: Date): string => {
+  const returnDateFormat = (item: number): string => {
     const date = new Date();
     const arg = new Date(item);
     const argDate = yearMonthDate(arg);

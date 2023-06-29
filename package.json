@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prod": "yarn build && yarn start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -23,6 +24,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
+    "sharp": "^0.32.1",
     "styled-components": "^6.0.0-rc.1",
     "styled-normalize": "^8.0.7",
     "typescript": "5.0.4"

@@ -19,6 +19,7 @@ export default function ServerPage({ params }: { params: { slug: string } }) {
       setID(params.slug[0]);
       setInitial(data.getBeforeChat.length);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
 
   if (loading) return loading;
