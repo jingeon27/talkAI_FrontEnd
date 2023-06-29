@@ -3,20 +3,13 @@ import { List } from "../../atom/list-item";
 import { GetConversationContent } from "@/api/getChatList";
 import { NewChat } from "../../atom/new-chat";
 import { useRouter } from "next/navigation";
+import { useDateTime } from "@/hooks/list";
 
 export const MainMenu = () => {
   const { data, loading, error } = GetConversationContent();
+  console.log(data);
   const router = useRouter();
-  const returnDateFormat = (item: number): string => {
-    const baseDateValue = item.toString();
-    const today = new Date().toISOString().substring(0, 10).replace(/-/g, "");
-    if (baseDateValue === today) return "오늘";
-    if (item === parseInt(today) - 1) return "어제";
-    return `${baseDateValue.slice(0, 4)}-${baseDateValue.slice(
-      4,
-      6
-    )}-${baseDateValue.slice(6, 8)}`;
-  };
+  const { isEqual, yearMonthDate, returnDateFormat } = useDateTime();
   return (
     <>
       <_Ul>
@@ -25,9 +18,16 @@ export const MainMenu = () => {
           !error &&
           data!.chatList.map((e, i) => (
             <>
-              {((i !== 0 && e.date !== data?.chatList[i - 1].date) ||
+              {((i !== 0 &&
+                !isEqual(
+                  yearMonthDate(new Date(e.date)),
+                  yearMonthDate(new Date(data!.chatList[i - 1].date)),
+                  0
+                )) ||
                 i === 0) && (
-                <_Date key={e.date}>{returnDateFormat(e.date)}</_Date>
+                <_Date key={e.date.toString()}>
+                  {returnDateFormat(e.date)}
+                </_Date>
               )}
               <List
                 onClick={() => router.push(`chat/${e.id}`)}

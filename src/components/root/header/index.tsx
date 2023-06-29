@@ -53,7 +53,7 @@ export const Header = (props: IHeaderProps) => {
       }
     }
     const interval = setTimeout(() => {
-      if (isCsr) {
+      if (isCsr && login) {
         reissue().then((res) => {
           setAccessToken(res.data!.reissue);
         });
