@@ -8,7 +8,7 @@
     "start": "next start",
     "prod": "yarn build && yarn start",
     "lint": "next lint",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 -s ./public",
     "build-storybook": "storybook build"
   },
   "dependencies": {

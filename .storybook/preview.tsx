@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../src/theme/theme";
 import React from "react";
+import { CustomApolloProvider } from "../src/api/customApolloProvider";
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -11,12 +12,17 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    nextjs: {
+      appDirectory: true,
+    },
   },
   decorators: [
     (Story) => (
-      <ThemeProvider {...{ theme }}>
-        <Story />
-      </ThemeProvider>
+      <CustomApolloProvider>
+        <ThemeProvider {...{ theme }}>
+          <Story />
+        </ThemeProvider>
+      </CustomApolloProvider>
     ),
   ],
 };
