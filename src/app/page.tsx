@@ -8,9 +8,7 @@ export default function Home() {
     <>
       <MainProvider>
         <_Main>
-          <Suspense>
-            <MainPage isMain={true} />
-          </Suspense>
+          <MainPage isMain={true} />
         </_Main>
       </MainProvider>
     </>
