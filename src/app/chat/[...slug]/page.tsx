@@ -6,7 +6,7 @@ import { useMainAction } from "@/hooks/context/main";
 import { styled } from "styled-components";
 
 export default function ServerPage({ params }: { params: { slug: string } }) {
-  const { data, loading, error } = useGetBeforeChat(params.slug[0]);
+  const { data, loading } = useGetBeforeChat(params.slug[0]);
   const { setChatBotAi, setInitial, setID } = useMainAction();
   useEffect(() => {
     console.log(data);
@@ -21,9 +21,6 @@ export default function ServerPage({ params }: { params: { slug: string } }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
-
-  if (loading) return loading;
-  if (error) return error;
   return (
     <>
       <_Main>
