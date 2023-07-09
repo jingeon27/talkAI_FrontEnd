@@ -40,9 +40,6 @@ const MainDiv = styled.main`
   position: relative;
   color: ${({ theme }) => theme.color.ON_BACKGROUND};
 `;
-
-// rome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
-
 const ErrorFadeIn = keyframes`
   0% {
     opacity: 0;
