@@ -6,13 +6,13 @@ export interface IRootContextProviderProps {
 type InitialStateType = {
   header: "main";
   login: boolean;
-  user: { name: string; email: string };
+  user: { name: string; email: string; profile: string };
   toast: { comment: string; toastState: boolean };
 };
 const initialState: InitialStateType = {
   header: "main",
   login: false,
-  user: { name: "", email: "" },
+  user: { name: "", email: "", profile: "" },
   toast: { comment: "", toastState: false },
 };
 type SetToastArgsType = typeof initialState.toast;

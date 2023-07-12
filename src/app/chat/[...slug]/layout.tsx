@@ -5,8 +5,8 @@ import { IChildren } from "../../../util/children";
 
 export default function IDLayout({ children }: IChildren) {
   return (
-    <MainProvider>
-      <Suspense>{children}</Suspense>
-    </MainProvider>
+    <Suspense>
+      <MainProvider>{children}</MainProvider>
+    </Suspense>
   );
 }

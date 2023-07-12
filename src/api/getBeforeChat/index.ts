@@ -11,15 +11,19 @@ export const GET_BEFROE_CHAT_QUERY = gql`
     getOpenAi(id: $id) {
       name
       role
+      profile
     }
   }
 `;
+export interface IGetBeforChat {
+  getBeforeChat: IChatResponse[];
+  getOpenAi: { role: string; name: string; profile: string };
+}
+
 export const useGetBeforeChat = (id: string) => {
-  const { data, loading, error } = useQuery<{
-    getBeforeChat: IChatResponse[];
-    getOpenAi: { role: string; name: string };
-  }>(GET_BEFROE_CHAT_QUERY, {
+  console.log(id);
+  const { data, loading } = useQuery<IGetBeforChat>(GET_BEFROE_CHAT_QUERY, {
     variables: { id },
   });
-  return { data, loading, error };
+  return { data, loading };
 };

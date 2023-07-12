@@ -3,6 +3,8 @@ import { keyframes, styled } from "styled-components";
 import { useChatEffect } from "@/hooks/chat";
 import { useMainValue } from "@/hooks/context/main";
 import { useRootValue } from "@/hooks/context/useRootValueContext";
+import Image from "next/image";
+
 export interface IChatProps extends IChatResponse {
   key: string;
   initial: boolean;
@@ -13,13 +15,44 @@ export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
   const { chat, isWriting } = useChatEffect(initial ? "" : content);
   const { name } = useMainValue();
   const { user, login } = useRootValue();
+  const { ai } = useMainValue();
   const isUser = props.role === "user";
+
   return (
     <>
       <_Chat {...props}>
         <div>
           <div>
-            {isUser ? `${login ? `${user.name}(나)` : "나"} : ` : `${name} : `}
+            <_Layout>
+              <div>
+                {isUser ? (
+                  <Image
+                    src={
+                      user.profile ||
+                      "https://storage.googleapis.com/talkai-storage/profile.png"
+                    }
+                    alt=""
+                    fill
+                    sizes="30px"
+                  />
+                ) : (
+                  <Image
+                    src={
+                      ai.profile ||
+                      "https://storage.googleapis.com/talkai-storage/blur.png"
+                    }
+                    alt=""
+                    fill
+                    sizes="30px"
+                  />
+                )}
+              </div>
+              <div>
+                {isUser
+                  ? `${login ? `${user.name}(나)` : "나"} : `
+                  : `${name} : `}
+              </div>
+            </_Layout>
           </div>
           <div>
             {initial ? content : isUser ? content : chat}
@@ -30,16 +63,33 @@ export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
     </>
   );
 };
+
 const ChatAnimate = keyframes`
-    0% {
-        opacity: 1;
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
+const _Layout = styled.div`
+  display: flex;
+  gap: 10px;
+  > div {
+    &:first-child {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      > img {
+        border-radius: 50%;
+        object-fit: contain;
+      }
     }
-    50% {
-        opacity:1;
-    }
-    100% {
-        opacity: 0;
-    }
+  }
 `;
 const _Chat = styled.div<Omit<IChatProps, "content" | "loading" | "initial">>`
   width: 100%;
@@ -56,7 +106,7 @@ const _Chat = styled.div<Omit<IChatProps, "content" | "loading" | "initial">>`
     > div {
       white-space: pre;
       &:first-child {
-        width: 120px;
+        width: 200px;
         color: ${({ theme }) => theme.color.ON_SURFACE_VARIENT};
         ${({ theme }) => theme.font.TITLE_LAGRE};
       }

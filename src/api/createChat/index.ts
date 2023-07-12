@@ -9,12 +9,15 @@ export const CREATE = gql`
   ) {
     createChat(chat: $chat, name: $name, role: $role) {
       id
+      profile
     }
   }
 `;
 export const useCreateChat = () => {
   const { chat, name, role } = useMainValue();
-  const [createChat] = useMutation<{ createChat: { id: string } }>(CREATE, {
+  const [createChat] = useMutation<{
+    createChat: { id: string; profile: string };
+  }>(CREATE, {
     variables: { name, chat, role },
   });
   return { createChat };
