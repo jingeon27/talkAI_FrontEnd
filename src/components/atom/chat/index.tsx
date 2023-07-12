@@ -1,9 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import { IChatResponse } from "@/util/chat-response.interface";
 import { keyframes, styled } from "styled-components";
 import { useChatEffect } from "@/hooks/chat";
 import { useMainValue } from "@/hooks/context/main";
 import { useRootValue } from "@/hooks/context/useRootValueContext";
+import Image from "next/image";
+
 export interface IChatProps extends IChatResponse {
   key: string;
   initial: boolean;
@@ -16,6 +17,7 @@ export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
   const { user, login } = useRootValue();
   const { ai } = useMainValue();
   const isUser = props.role === "user";
+
   return (
     <>
       <_Chat {...props}>
@@ -23,16 +25,27 @@ export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
           <div>
             <_Layout>
               <div>
-                <img
-                  src={
-                    isUser
-                      ? user.profile ||
-                        "https://storage.googleapis.com/talkai-storage/profile.png"
-                      : ai.profile ||
-                        "https://storage.googleapis.com/talkai-storage/blur.png"
-                  }
-                  alt={""}
-                />
+                {isUser ? (
+                  <Image
+                    src={
+                      user.profile ||
+                      "https://storage.googleapis.com/talkai-storage/profile.png"
+                    }
+                    alt=""
+                    fill
+                    sizes="30px"
+                  />
+                ) : (
+                  <Image
+                    src={
+                      ai.profile ||
+                      "https://storage.googleapis.com/talkai-storage/blur.png"
+                    }
+                    alt=""
+                    fill
+                    sizes="30px"
+                  />
+                )}
               </div>
               <div>
                 {isUser
@@ -50,27 +63,30 @@ export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
     </>
   );
 };
+
 const ChatAnimate = keyframes`
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity:1;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 `;
+
 const _Layout = styled.div`
   display: flex;
   gap: 10px;
   > div {
-    > img {
-      &:first-child {
-        position: relative;
-        width: 30px;
-        height: 30px;
+    &:first-child {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      > img {
         border-radius: 50%;
+        object-fit: contain;
       }
     }
   }
