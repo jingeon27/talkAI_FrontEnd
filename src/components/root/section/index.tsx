@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
 import { Menu } from "../menu";
 
-export interface ISectionProps {
-  children: ReactNode;
+export interface ISectionProps extends HTMLAttributes<HTMLTableSectionElement> {
   active: boolean;
 }
 

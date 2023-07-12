@@ -1,8 +1,8 @@
 import { ChatIcon } from "@/assets/chat-icon";
 import { styled } from "styled-components";
 import { _Template } from "../new-chat";
-export interface IListProps {
-  onClick: () => void;
+import { LiHTMLAttributes } from "react";
+export interface IListProps extends LiHTMLAttributes<HTMLLIElement> {
   name: string;
 }
 export const List = (props: IListProps) => (

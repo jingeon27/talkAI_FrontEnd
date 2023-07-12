@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import Image from "next/image";
 import { logo } from "@/../public";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { HTMLAttributes, useEffect } from "react";
 import { useReissue } from "@/api/reissue";
 import { setAccessToken } from "@/util/storage/setAccessToken";
 import { useRootAction } from "@/hooks/context/useRootActionContext";
@@ -12,8 +12,7 @@ import { useGetUserInfo } from "@/api/getUserInfo";
 import { useRootValue } from "@/hooks/context/useRootValueContext";
 import { Logout } from "@/util/logout";
 
-export interface IHeaderProps {
-  onClick: () => void;
+export interface IHeaderProps extends HTMLAttributes<HTMLDivElement> {
   width: number;
 }
 export const Header = (props: IHeaderProps) => {

@@ -1,13 +1,8 @@
-import { ChangeEvent, KeyboardEvent } from "react";
+import { InputHTMLAttributes } from "react";
 import { styled } from "styled-components";
 
-export interface IInputQuestionProps {
-  value: string;
-  placeholder: string;
-  onInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
-  readOnly: boolean;
-}
+export interface IInputQuestionProps
+  extends InputHTMLAttributes<HTMLInputElement> {}
 export const InputQuestion = (props: IInputQuestionProps) => {
   return (
     <>

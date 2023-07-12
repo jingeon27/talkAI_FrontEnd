@@ -4,12 +4,13 @@ import { useChatEffect } from "@/hooks/chat";
 import { useMainValue } from "@/hooks/context/main";
 import { useRootValue } from "@/hooks/context/useRootValueContext";
 import Image from "next/image";
+import { HTMLAttributes } from "react";
 
-export interface IChatProps extends IChatResponse {
-  key: string;
-  initial: boolean;
-  loading?: boolean;
-}
+export type IChatProps = IChatResponse &
+  HTMLAttributes<HTMLDivElement> & {
+    initial: boolean;
+    loading?: boolean;
+  };
 
 export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
   const { chat, isWriting } = useChatEffect(initial ? "" : content);

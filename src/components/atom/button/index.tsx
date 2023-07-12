@@ -1,6 +1,6 @@
+import { ButtonHTMLAttributes } from "react";
 import { styled } from "styled-components";
-export interface IButtonProps {
-  onClick: () => void;
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
 }
 export const Button = ({ text, ...props }: IButtonProps) => (

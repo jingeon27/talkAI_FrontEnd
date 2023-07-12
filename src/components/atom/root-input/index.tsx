@@ -1,7 +1,7 @@
 import { MikeIcon } from "@/assets/mike-icon";
 import { styled } from "styled-components";
 import { InputQuestion } from "../input";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { SendIcon } from "@/assets/send-icon";
 import { useMainAction } from "@/hooks/context/main";
 import { ILoadingProps } from "@/util/loading";
@@ -17,8 +17,11 @@ export const RootInput = ({ loading }: ILoadingProps) => {
       <_Wrapper>
         <div>
           <InputQuestion
+            type="text"
             value={content}
-            onInput={(e) => setContent(e.target.value)}
+            onInput={(e: ChangeEvent<HTMLInputElement>) => {
+              setContent(e.target.value);
+            }}
             placeholder={"질문을 입력해주세요."}
             onKeyDown={(e) => {
               if (content && e.key === "Enter" && !e.nativeEvent.isComposing) {
