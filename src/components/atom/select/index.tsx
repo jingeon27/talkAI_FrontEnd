@@ -1,10 +1,9 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, HTMLAttributes } from "react";
 import { PolygonIcon } from "@/assets/polygon-icon";
 import { useClickHandler } from "@/hooks/click";
 import { styled, keyframes } from "styled-components";
-export interface ISelectProps {
+export interface ISelectProps extends HTMLAttributes<HTMLDivElement> {
   now: string;
-  children: ReactNode;
 }
 
 export const Select = ({ now, children }: ISelectProps) => {
