@@ -17,32 +17,32 @@ type InitialStateType = {
   chat: IChatResponse[];
   name: string;
   role: string;
-  id: string;
+  ai: { id: string; profile: string };
   initial: number;
 };
 
 const initialState: InitialStateType = {
-  scrollRef: null,
   mikeOn: false,
+  scrollRef: null,
   chat: [],
   name: "김아무개",
   role: "비서",
-  id: "",
+  ai: { id: "", profile: "" },
   initial: 1,
 };
-
+type aiType = typeof initialState.ai;
 interface IMainActionContext {
   changeChat: (props: IChatResponse) => void;
   setMikeState: () => void;
   setChatBotAi: (props: IChatResponse[], name: string, role: string) => void;
-  setID: (id: string) => void;
+  setAi: (ai: aiType) => void;
   setInitial: (initial: number) => void;
 }
 const MainContextAction = createContext<IMainActionContext>({
   changeChat: () => null,
   setMikeState: () => null,
   setChatBotAi: () => null,
-  setID: () => null,
+  setAi: () => null,
   setInitial: () => null,
 });
 const MainContextValue = createContext<InitialStateType>(initialState);
@@ -60,11 +60,11 @@ export const MainProvider = ({ children }: IChildren) => {
       setChatBotAi(chat: IChatResponse[], name: string, role: string) {
         setState((prev) => ({ ...prev, chat, name, role }));
       },
-      setID(id: string) {
-        setState((prev) => ({ ...prev, id }));
-      },
       setInitial(initial: number) {
         setState((prev) => ({ ...prev, initial }));
+      },
+      setAi(ai: aiType) {
+        setState((prev) => ({ ...prev, ai }));
       },
     }),
     []

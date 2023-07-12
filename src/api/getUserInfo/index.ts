@@ -5,12 +5,13 @@ export const GET_USERINFO_QUERY = gql`
     getUserInfo {
       name
       email
+      profile
     }
   }
 `;
 export const useGetUserInfo = () => {
   const [getUserInfo] = useLazyQuery<{
-    getUserInfo: { email: string; name: string };
+    getUserInfo: { email: string; name: string; profile: string };
   }>(GET_USERINFO_QUERY);
   return { getUserInfo };
 };

@@ -4,44 +4,39 @@ import { useEffect } from "react";
 import { useCreateChat } from "../createChat";
 import { getAccessToken } from "@/util/storage/getAccessToken";
 import { GetConversationContent } from "../getChatList";
+import { useUpdateResponse } from "../updateResponse";
+import { useGetImage } from "../getAiImage";
 
 export const CHAT_RESPONSE_MUTATION = gql`
   mutation ChatResponse($chat: [ChatResponseInput!]!) {
     chatResponse(chat: $chat)
   }
 `;
-export const UPDATE_RESPONSE_MUTATION = gql`
-  mutation Update($chat: [ChatResponseInput!]!, $id: ID!) {
-    updateChat(chat: $chat, id: $id) {
-      content
-    }
-  }
-`;
+
 export const useChatResponse = (): {
   loading: boolean;
   error: ApolloError | undefined;
 } => {
-  const { chat, id } = useMainValue();
-  const { changeChat, setID } = useMainAction();
+  const { chat, ai } = useMainValue();
+  const { changeChat, setAi } = useMainAction();
   const { createChat } = useCreateChat();
   const { refetch, data } = GetConversationContent();
+  const { updateChat, authHandling } = useUpdateResponse();
+  const { profileImage } = useGetImage();
   const [chatResponse, handling] = useMutation<{
     chatResponse: string;
   }>(CHAT_RESPONSE_MUTATION);
-  const [updateChat, authHandling] = useMutation<{
-    updateChat: { content: string };
-  }>(UPDATE_RESPONSE_MUTATION);
+
   const isToken = getAccessToken();
   useEffect(() => {
-    console.log(chat);
     if (chat.at(-1)?.role === "user") {
       {
         if (isToken) {
           if (chat.length === 2) {
             createChat().then((res) => {
-              const id = res.data!.createChat.id;
-              setID(id);
-              updateChat({ variables: { id, chat } }).then((res) => {
+              setAi(res.data!.createChat);
+
+              updateChat({ variables: { id: ai.id, chat } }).then((res) => {
                 changeChat({
                   role: "assistant",
                   content: res.data!.updateChat.content,
@@ -52,7 +47,7 @@ export const useChatResponse = (): {
               });
             });
           } else {
-            updateChat({ variables: { id, chat } }).then((res) => {
+            updateChat({ variables: { id: ai.id, chat } }).then((res) => {
               changeChat({
                 role: "assistant",
                 content: res.data!.updateChat.content,
@@ -63,6 +58,14 @@ export const useChatResponse = (): {
             });
           }
         } else {
+          if (chat.length === 2) {
+            profileImage({ variables: { prompt: chat[0].content } }).then(
+              (res) => {
+                console.log(res);
+                setAi({ id: "", profile: res.data!.profileImage });
+              }
+            );
+          }
           chatResponse({
             variables: { chat },
           }).then((res) =>

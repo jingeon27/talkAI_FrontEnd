@@ -18,9 +18,7 @@ export default function RootLayout({ children }: IChildren) {
       <title>TalkAi</title>
       <body>
         <StyledComponentsRegistry>
-          <RootLayoutComponents>
-            <Suspense>{children}</Suspense>
-          </RootLayoutComponents>
+          <RootLayoutComponents>{children}</RootLayoutComponents>
         </StyledComponentsRegistry>
       </body>
     </html>

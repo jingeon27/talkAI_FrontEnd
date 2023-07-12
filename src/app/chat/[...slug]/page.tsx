@@ -7,20 +7,19 @@ import { styled } from "styled-components";
 
 export default function ServerPage({ params }: { params: { slug: string } }) {
   const { data, loading } = useGetBeforeChat(params.slug[0]);
-  const { setChatBotAi, setInitial, setID } = useMainAction();
+  const { setChatBotAi, setInitial, setAi } = useMainAction();
   useEffect(() => {
-    console.log(data);
     if (data !== undefined) {
       setChatBotAi(
         data.getBeforeChat.map((e) => ({ role: e.role, content: e.content })),
         data.getOpenAi.name,
         data.getOpenAi.role
       );
-      setID(params.slug[0]);
+      setAi({ id: params.slug[0], profile: data.getOpenAi.profile });
       setInitial(data.getBeforeChat.length);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, data]);
+  }, [data, loading]);
   return (
     <>
       <_Main>
