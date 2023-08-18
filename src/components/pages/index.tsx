@@ -13,7 +13,7 @@ export interface IMainPageProps {
   isMain: boolean;
 }
 export const MainPage = ({ isMain }: IMainPageProps) => {
-  const { scrollRef, mikeOn, chat, initial, name, role } = useMainValue();
+  const { mikeOn, chat, initial, name, role } = useMainValue();
   const { user } = useRootValue();
   const { setToast } = useRootAction();
   const { loading, error } = useChatResponse();
@@ -24,24 +24,22 @@ export const MainPage = ({ isMain }: IMainPageProps) => {
   }, [error, setToast]);
   return (
     <>
-      <_Layout ref={scrollRef}>
-        {chat.length === 1 && <StartBox {...{ name, role, user }} />}
-        {chat.slice(1, initial).map((e, i) => (
-          <Chat {...e} key={`asmdklasdma${i}`} initial={true} />
-        ))}
-        {chat.slice(initial, chat.length).map((e, i) => (
-          <Chat {...e} key={`asmdklasdma${i}`} initial={false} />
-        ))}
-        {loading && (
-          <Chat
-            key={"smdklmwkmdqwmld"}
-            role={"assistant"}
-            content={""}
-            initial={false}
-            loading
-          />
-        )}
-      </_Layout>
+      {chat.length === 1 && <StartBox {...{ name, role, user }} />}
+      {chat.slice(1, initial).map((e, i) => (
+        <Chat {...e} key={`asmdklasdma${i}`} initial={true} />
+      ))}
+      {chat.slice(initial, chat.length).map((e, i) => (
+        <Chat {...e} key={`asmdklasdma${i}`} initial={false} />
+      ))}
+      {loading && (
+        <Chat
+          key={"smdklmwkmdqwmld"}
+          role={"assistant"}
+          content={""}
+          initial={false}
+          loading
+        />
+      )}
       {mikeOn && !loading ? (
         <VoiceComponents />
       ) : (
@@ -51,17 +49,3 @@ export const MainPage = ({ isMain }: IMainPageProps) => {
     </>
   );
 };
-const _Layout = styled.div`
-  width: 100%;
-  height: 100%;
-
-  box-sizing: border-box;
-  padding-bottom: 100px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  ${({ theme }) => theme.scroll};
-  overflow-x: hidden;
-`;
