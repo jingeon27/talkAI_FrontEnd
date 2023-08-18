@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { useMainValue } from "../context/main";
 const initialValue = { chat: "", isWriting: false };
 export type useChatEffectType = typeof initialValue;
-export const useChatEffect = (content: string): useChatEffectType => {
+export const useChatEffect = <T extends Element>(
+  content: string,
+  ref: RefObject<T>
+): useChatEffectType => {
   const [state, setState] = useState<useChatEffectType>(initialValue);
-  const { scrollRef } = useMainValue();
   useEffect(() => {
     const interval = setTimeout(() => {
       if (state.chat.length !== content.length) {
@@ -15,9 +17,7 @@ export const useChatEffect = (content: string): useChatEffectType => {
       } else {
         setState((prev) => ({ ...prev, isWriting: true }));
       }
-      if (scrollRef !== null) {
-        scrollRef.current?.scrollTo(0, scrollRef.current?.scrollHeight);
-      }
+      ref.current?.scrollTo(0, ref.current?.scrollHeight);
     }, 30);
 
     return () => clearTimeout(interval);

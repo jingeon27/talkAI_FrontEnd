@@ -13,7 +13,6 @@ import {
 
 type InitialStateType = {
   mikeOn: boolean;
-  scrollRef: RefObject<HTMLDivElement> | null;
   chat: IChatResponse[];
   name: string;
   role: string;
@@ -23,7 +22,6 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
   mikeOn: false,
-  scrollRef: null,
   chat: [],
   name: "김아무개",
   role: "비서",
@@ -47,8 +45,7 @@ const MainContextAction = createContext<IMainActionContext>({
 });
 const MainContextValue = createContext<InitialStateType>(initialState);
 export const MainProvider = ({ children }: IChildren) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [state, setState] = useState(() => ({ ...initialState, scrollRef }));
+  const [state, setState] = useState(initialState);
   const action = useMemo(
     () => ({
       changeChat(props: IChatResponse) {

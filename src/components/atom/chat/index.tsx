@@ -4,7 +4,7 @@ import { useChatEffect } from "@/hooks/chat";
 import { useMainValue } from "@/hooks/context/main";
 import { useRootValue } from "@/hooks/context/useRootValueContext";
 import Image from "next/image";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useRef } from "react";
 
 export type IChatProps = IChatResponse &
   HTMLAttributes<HTMLDivElement> & {
@@ -13,58 +13,73 @@ export type IChatProps = IChatResponse &
   };
 
 export const Chat = ({ content, loading, initial, ...props }: IChatProps) => {
-  const { chat, isWriting } = useChatEffect(initial ? "" : content);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { chat, isWriting } = useChatEffect(initial ? "" : content, scrollRef);
   const { name } = useMainValue();
   const { user, login } = useRootValue();
   const { ai } = useMainValue();
   const isUser = props.role === "user";
-
   return (
     <>
-      <_Chat {...props}>
-        <div>
+      <_Layout2 ref={scrollRef}>
+        <_Chat {...props}>
           <div>
-            <_Layout>
-              <div>
-                {isUser ? (
-                  <Image
-                    src={
-                      user.profile ||
-                      "https://storage.googleapis.com/talkai-storage/profile.png"
-                    }
-                    alt=""
-                    fill
-                    sizes="30px"
-                  />
-                ) : (
-                  <Image
-                    src={
-                      ai.profile ||
-                      "https://storage.googleapis.com/talkai-storage/blur.png"
-                    }
-                    alt=""
-                    fill
-                    sizes="30px"
-                  />
-                )}
-              </div>
-              <div>
-                {isUser
-                  ? `${login ? `${user.name}(나)` : "나"} : `
-                  : `${name} : `}
-              </div>
-            </_Layout>
+            <div>
+              <_Layout>
+                <div>
+                  {isUser ? (
+                    <Image
+                      src={
+                        user.profile ||
+                        "https://storage.googleapis.com/talkai-storage/profile.png"
+                      }
+                      alt=""
+                      fill
+                      sizes="30px"
+                    />
+                  ) : (
+                    <Image
+                      src={
+                        ai.profile ||
+                        "https://storage.googleapis.com/talkai-storage/blur.png"
+                      }
+                      alt=""
+                      fill
+                      sizes="30px"
+                    />
+                  )}
+                </div>
+                <div>
+                  {isUser
+                    ? `${login ? `${user.name}(나)` : "나"} : `
+                    : `${name} : `}
+                </div>
+              </_Layout>
+            </div>
+            <div>
+              {initial ? content : isUser ? content : chat}
+              {!initial && (!isWriting || loading) && !isUser && <span>|</span>}
+            </div>
           </div>
-          <div>
-            {initial ? content : isUser ? content : chat}
-            {!initial && (!isWriting || loading) && !isUser && <span>|</span>}
-          </div>
-        </div>
-      </_Chat>
+        </_Chat>
+      </_Layout2>
     </>
   );
 };
+const _Layout2 = styled.div`
+  width: 100%;
+  height: 100%;
 
+  box-sizing: border-box;
+  padding-bottom: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${({ theme }) => theme.scroll};
+  overflow-x: hidden;
+`;
 const ChatAnimate = keyframes`
   0% {
     opacity: 1;
