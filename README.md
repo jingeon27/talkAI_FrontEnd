@@ -57,29 +57,6 @@ user정보를 전역상태로 관리하고 chat의 상태는 pages 단위로 관
 
 내부적으로 제공하는 suspense로 페이지를 감싸면 error.tsx나 loading.tsx로 fallback되는 것을 활용하여 chat부분에서 선언적으로 비동기 함수를 처리하였습니다.
 
-## 회고
-
----
-
-useEffect를 사용하여 데이터 호출로직을 짜다 보니, 데이터 호출하는 부분이 클라이언트 쪽으로 위임되게 되었고, 추후 블로그와 공식문서를 보고 난 뒤 아래 방식대로 호출로직을 서버로 돌리는 방법을 있다는 것을 깨닫게 되었습니다.
-
-```tsx
-import { getClient } from "@/lib/client";
-
-import { gql } from "@apollo/client";
-
-const query = gql`query Now {
-    now(id: "1")
-}`;
-
-export default async function Page() {
-  const { data } = await getClient().query({ query });
-
-  return <main>{data.now}</main>;
-}
-```
-
-초기에 servercomponent와 clientcomponent에 대한 이해가 부족한 상태로 개발하여, servercomponent를 100%활용하지 못해 아쉬움이 남게 되었습니다.
 
 ## 여담
 
